@@ -17,7 +17,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended', 'plugin:prettier/recommended', 'next', 'next/core-web-vitals'],
+  extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended', 'next', 'next/core-web-vitals'],
   //plugins: ["react"],
   rules: {
     semi: ['error', 'always'],
