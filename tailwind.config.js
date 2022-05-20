@@ -4,4 +4,16 @@ module.exports = {
     extend: {},
   },
   plugins: [require('daisyui')],
+  daisyui: {
+    themes: [
+      {
+        dracula: {
+          ...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
+          primary: '#BB000E',
+          'primary-focus': '#E31C25',
+          'base-100': '#212121',
+        },
+      },
+    ],
+  },
 };
