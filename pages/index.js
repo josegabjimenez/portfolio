@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { Footer, Navbar } from '@components/index';
-import avatar from '@assets/images/avatar.png';
+import avatar from '@assets/images/Avatar.png';
 
 export default function Home() {
   return (
@@ -13,10 +13,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="text-4xl font-bold text-primary text-center">Welcome to my portfolio!</h1>
-      <div className="bg-red-500 w-16 h-16 rounded-full relative">
-        <Image src={avatar} width={200} height={200} />
-      </div>
+      <section className="flex flex-col justify-center items-center mt-12 mb-12">
+        <h1 className="text-4xl font-bold text-primary text-center">Welcome to my portfolio!</h1>
+        <div className="bg-red-500 w-32 h-28 rounded-full relative mt-12">
+          <div className="absolute -bottom-2">
+            <Image src={avatar} width={200} height={200} />
+          </div>
+        </div>
+      </section>
       {/* <style jsx>{`
         h1 {
           text-align: center;

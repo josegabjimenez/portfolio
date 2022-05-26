@@ -1,15 +1,13 @@
 import React from 'react';
-import { VscGithub } from 'react-icons/vsc';
-import { AiFillLinkedin } from 'react-icons/ai';
-import { CgMail } from 'react-icons/cg';
+import { AiFillGithub, AiFillLinkedin, AiFillMail } from 'react-icons/ai';
 
 const Footer = () => {
   return (
     <footer>
       <section className="flex justify-center text-4xl gap-6">
-        <VscGithub />
+        <AiFillGithub />
         <AiFillLinkedin />
-        <CgMail />
+        <AiFillMail />
       </section>
       <section className="footer footer-center p-4 mt-4 text-base-content">
         <div>
