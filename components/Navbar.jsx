@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { GrCode } from 'react-icons/gr';
 import { CgCodeSlash } from 'react-icons/cg';
 
@@ -34,9 +35,11 @@ const Navbar = () => {
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             {routes.map((route) => (
-              <li key={`${route.path}-mobile`}>
-                <a>{route.name}</a>
-              </li>
+              <Link href={route.path} key={route.path}>
+                <li key={`${route.path}-mobile`}>
+                  <p>{route.name}</p>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
@@ -50,9 +53,11 @@ const Navbar = () => {
         {/* Desktop menu */}
         <ul className="menu menu-horizontal p-0">
           {routes.map((route) => (
-            <li key={route.path}>
-              <a>{route.name}</a>
-            </li>
+            <Link href={route.path} key={`${route.path}-desktop`}>
+              <li key={route.path}>
+                <p>{route.name}</p>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

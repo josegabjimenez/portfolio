@@ -1,6 +1,6 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GithubAuthProvider, signOut } from 'firebase/auth';
-import 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 // import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
@@ -14,12 +14,14 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
+let app;
 if (!getApps.length) {
-  initializeApp(firebaseConfig);
-  // getAnalytics();
+  app = initializeApp(firebaseConfig); // Firebase app
 }
+const db = getFirestore(app); // Firestore database
+const auth = getAuth(); // Auth
 
-const auth = getAuth();
+// Auth methods
 const githubSignIn = async () => {
   try {
     await signInWithPopup(auth, new GithubAuthProvider());
@@ -41,4 +43,4 @@ const logOut = async () => {
   }
 };
 
-export { auth, githubSignIn, logOut };
+export { db, auth, githubSignIn, logOut };
