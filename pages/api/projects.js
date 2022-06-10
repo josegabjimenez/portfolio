@@ -7,7 +7,7 @@ const getProjects = async () => {
     const projectsRef = collection(db, 'projects');
     const docs = await getDocs(projectsRef);
     docs.forEach((doc) => {
-      projects.push(doc.data());
+      projects.push({ id: doc.id, ...doc.data() });
     });
     return projects;
   } catch (err) {
