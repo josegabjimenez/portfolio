@@ -16,14 +16,14 @@ const Portfolio = ({ projects }) => {
   );
 };
 
-export async function getStaticProps() {
-  const res = await fetch(endPoints.projects.get);
+export const getStaticProps = async () => {
+  const res = await fetch(endPoints.projects.getAll);
   const { projects } = await res.json();
   return {
     props: {
       projects,
     }, // will be passed to the page component as props
   };
-}
+};
 
 export default Portfolio;
