@@ -10,7 +10,8 @@
       "@styles/*": ["styles/*"],
       "@services/*": ["services/*"],
       "@assets/*": ["assets/*"],
-      "@firebase/*": ["firebase/*"]
+      "@firebase/*": ["firebase/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

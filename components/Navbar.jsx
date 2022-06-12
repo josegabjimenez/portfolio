@@ -24,7 +24,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar transparent">
       <div className="navbar-start ml-4">
         {/* Mobile Menu */}
         <div className="dropdown">
@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
         {/* Code Logo */}
         {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-        <div className="text-primary text-7xl p-0 m-0">
+        <div className="lg:block hidden text-primary text-7xl p-0 m-0">
           <CgCodeSlash />
         </div>
       </div>

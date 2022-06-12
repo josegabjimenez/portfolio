@@ -1,54 +1,42 @@
 import React from 'react';
 import endPoints from '@services/endPoints';
+import useWindowSize from '@hooks/useWindowSize';
+import { Hero } from '@components/index';
+
+//Icons
+import { MdDone } from 'react-icons/md';
+import { RiToolsFill } from 'react-icons/ri';
 
 const Project = ({ project }) => {
+  const size = useWindowSize();
+  console.log(Math.floor(size.height * 0.5));
   return (
     <main className="flex flex-col justify-center items-center">
-      <section className="hero h-80 shadow-[inset_0_0_15px_2px_rgba(0,0,0,0.3)]" style={{ backgroundImage: `url(${project.images[0]})` }}>
-        <div className="hero-overlay bg-opacity-60" />
-        <div className="hero-content text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">{project.title}</h1>
+      <Hero data={project} />
+      <section className={`content w-1/3 text-justify mb-8`}>
+        {project.is_finished ? (
+          <div className="badge badge-success">
+            <MdDone className="mr-1" /> Done
           </div>
-        </div>
-      </section>
-      <section className="mt-16 w-1/3 text-justify">
+        ) : (
+          <div className="badge badge-warning">
+            <RiToolsFill className="mr-1" />
+            Working
+          </div>
+        )}
+        <div></div>
         <h1>Project</h1>
         <h1>{project.description}</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, assumenda laboriosam ea, beatae excepturi totam hic harum soluta sapiente sit, dicta inventore nesciunt! Animi asperiores
-          aperiam saepe, a modi officia.
-        </p>
       </section>
-      {/* <p>{project.title}</p> */}
+
+      {/* Some styles in JSX */}
+      <style jsx>
+        {`
+          .content {
+            margin-top: ${Math.floor(size.height * 0.3)}px;
+          }
+        `}
+      </style>
     </main>
   );
 };
