@@ -5,11 +5,11 @@ import { Hero } from '@components/index';
 
 //Icons
 import { MdDone } from 'react-icons/md';
-import { RiToolsFill } from 'react-icons/ri';
+import { RiToolsFill, RiGithubFill, RiEyeFill } from 'react-icons/ri';
 
 const Project = ({ project }) => {
   const size = useWindowSize();
-  console.log(Math.floor(size.height * 0.5));
+  console.log(project);
   return (
     <main className="flex flex-col justify-center items-center">
       <Hero data={project} />
@@ -24,16 +24,46 @@ const Project = ({ project }) => {
             Working
           </div>
         )}
-        <div></div>
-        <h1>Project</h1>
-        <h1>{project.description}</h1>
+        <div className="mt-8">
+          <p className="text-justify">{project.description}</p>
+
+          {/* Source Code button */}
+          {project.github_link && !project.is_private && (
+            <a className="" href={project.github_link} target="_blank" rel="noreferrer">
+              <div className="btn btn-outline btn-secondary flex items-center gap-2 mt-2">
+                <RiGithubFill />
+                Source Code
+              </div>
+            </a>
+          )}
+          {/* Live Version button */}
+          {project.project_link && (
+            <a className="" href={project.project_link} target="_blank" rel="noreferrer">
+              <div className="btn btn-outline btn-accent flex items-center gap-2 mt-2">
+                <RiEyeFill />
+                Live Version
+              </div>
+            </a>
+          )}
+
+          {/* Technologies */}
+          <div className="mt-8">
+            <h3 className="text-2xl font-bold">Technologies</h3>
+            <ul className="list-disc list-inside">
+              {project.technologies.map((tech, index) => (
+                <li key={index}>{tech}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
 
       {/* Some styles in JSX */}
       <style jsx>
         {`
           .content {
-            margin-top: ${Math.floor(size.height * 0.3)}px;
+            margin-top: ${Math.floor(size.height * 0.45)}px;
+            min-height: ${Math.floor(size.height * 0.3)}px;
           }
         `}
       </style>
