@@ -9,11 +9,11 @@ import { RiToolsFill, RiGithubFill, RiEyeFill } from 'react-icons/ri';
 
 const Project = ({ project }) => {
   const size = useWindowSize();
-  console.log(project);
+  // console.log(project);
   return (
     <main className="flex flex-col justify-center items-center">
       <Hero data={project} />
-      <section className={`content w-1/3 text-justify mb-8`}>
+      <section className={`content w-11/12 lg:w-1/2 xl:w-1/3 text-justify mb-8`}>
         {project.is_finished ? (
           <div className="badge badge-success">
             <MdDone className="mr-1" /> Done
@@ -47,13 +47,68 @@ const Project = ({ project }) => {
           )}
 
           {/* Technologies */}
-          <div className="mt-8">
-            <h3 className="text-2xl font-bold">Technologies</h3>
-            <ul className="list-disc list-inside">
-              {project.technologies.map((tech, index) => (
-                <li key={index}>{tech}</li>
-              ))}
-            </ul>
+
+          <h3 className="text-2xl font-bold mt-8">Technologies used</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {project.technologies.map((tech) => (
+              <>
+                <div key={tech.name} className="relative bg-base-content text-base-100 pr-2 mt-5 rounded-md min-w-max">
+                  <div style={{ backgroundColor: tech.bg_color }} className="flex justify-center items-center absolute -left-2 -top-3 h-12 w-12 rounded-md">
+                    <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} />
+                  </div>
+                  <p className="ml-12">{tech.name}</p>
+                </div>
+              </>
+            ))}
+          </div>
+
+          {/* Images carousel */}
+          <h3 className="text-2xl font-bold mt-8">Some images</h3>
+          <div className="carousel w-full h-80">
+            <div id="slide1" className="carousel-item relative w-full">
+              <img src="https://api.lorem.space/image/car?w=800&h=200&hash=8B7BCDC2" className="w-full" />
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide4" className="btn btn-circle">
+                  ⬅️
+                </a>
+                <a href="#slide2" className="btn btn-circle">
+                  ➡️
+                </a>
+              </div>
+            </div>
+            <div id="slide2" className="carousel-item relative w-full">
+              <img src="https://api.lorem.space/image/car?w=800&h=200&hash=500B67FB" className="w-full" />
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide1" className="btn btn-circle">
+                  ⬅️
+                </a>
+                <a href="#slide3" className="btn btn-circle">
+                  ➡️
+                </a>
+              </div>
+            </div>
+            <div id="slide3" className="carousel-item relative w-full">
+              <img src="https://api.lorem.space/image/car?w=800&h=200&hash=A89D0DE6" className="w-full" />
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide2" className="btn btn-circle">
+                  ⬅️
+                </a>
+                <a href="#slide4" className="btn btn-circle">
+                  ➡️
+                </a>
+              </div>
+            </div>
+            <div id="slide4" className="carousel-item relative w-full">
+              <img src="https://api.lorem.space/image/car?w=800&h=200&hash=225E6693" className="w-full" />
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide3" className="btn btn-circle">
+                  ⬅️
+                </a>
+                <a href="#slide1" className="btn btn-circle">
+                  ➡️
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
