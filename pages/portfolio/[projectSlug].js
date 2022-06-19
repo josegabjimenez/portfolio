@@ -1,14 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 import endPoints from '@services/endPoints';
 import useWindowSize from '@hooks/useWindowSize';
 import { Hero } from '@components/index';
+// import Carousel from 'react-elastic-carousel';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 //Icons
-import { MdDone } from 'react-icons/md';
+import { MdDone, MdOutlineArrowBack } from 'react-icons/md';
 import { RiToolsFill, RiGithubFill, RiEyeFill } from 'react-icons/ri';
-//Carousel CSS
-import "~slick-carousel/slick/slick.css"; 
-import "~slick-carousel/slick/slick-theme.css";
+import '@splidejs/react-splide/css';
 
 const Project = ({ project }) => {
   const size = useWindowSize();
@@ -17,16 +18,25 @@ const Project = ({ project }) => {
     <main className="flex flex-col justify-center items-center">
       <Hero data={project} />
       <section className={`content w-11/12 lg:w-1/2 xl:w-1/3 text-justify mb-8`}>
-        {project.is_finished ? (
-          <div className="badge badge-success">
-            <MdDone className="mr-1" /> Done
-          </div>
-        ) : (
-          <div className="badge badge-warning">
-            <RiToolsFill className="mr-1" />
-            Working
-          </div>
-        )}
+        <div className="flex justify-between items-center">
+          <Link href="/portfolio">
+            <button className="btn btn-outline btn-primary btn-sm">
+              <MdOutlineArrowBack />
+              Go back
+            </button>
+          </Link>
+
+          {project.is_finished ? (
+            <div className="badge badge-success">
+              <MdDone className="mr-1" /> Done
+            </div>
+          ) : (
+            <div className="badge badge-warning">
+              <RiToolsFill className="mr-1" />
+              Working
+            </div>
+          )}
+        </div>
         <div className="mt-8">
           <p className="text-justify">{project.description}</p>
 
@@ -52,7 +62,7 @@ const Project = ({ project }) => {
           {/* Technologies */}
 
           <h3 className="text-2xl font-bold mt-8">Technologies used</h3>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center mt-8 gap-4">
             {project.technologies.map((tech) => (
               <>
                 <div key={tech.name} className="relative bg-base-content text-base-100 pr-2 mt-5 rounded-md min-w-max">
@@ -66,9 +76,15 @@ const Project = ({ project }) => {
           </div>
 
           {/* Images carousel */}
-          <h3 className="text-2xl font-bold mt-8">Some images</h3>
-
-   
+          <h3 className="text-2xl font-bold mt-10">Some images</h3>
+          <div className="mt-8">
+            <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
+              {project.images.map((image, index) => (
+                <SplideSlide key={`image-${index + 1}`}>
+                  <img className="w-full h-80" src={image} alt={`Project ${index + 1}`} />
+                </SplideSlide>
+              ))}
+            </Splide>
           </div>
         </div>
       </section>

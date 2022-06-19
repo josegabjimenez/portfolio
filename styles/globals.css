@@ -17,3 +17,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: #212121;
+  background: #bd000d;
+}
+
+::selection {
+  color: #212121;
+  background: #bd000d;
+}
