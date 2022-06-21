@@ -6,10 +6,13 @@ const Portfolio = ({ projects }) => {
   return (
     <main className="flex flex-col justify-center items-center my-8">
       <h1 className="font-bold text-4xl mb-8">Projects 🔨</h1>
-      <section className="grid grid-flow-col auto-cols-max gap-4 w-4/5 ">
+      {/* <section className="grid grid-flow-col auto-cols-max gap-4 w-4/5 "> */}
+      <section className="flex flex-wrap justify-center gap-4 w-4/5 ">
         {/* {console.log(projects)} */}
         {projects.map((project) => (
-          <Card key={project.id} project={project} />
+          <div key={project.title}>
+            <Card project={project} />
+          </div>
         ))}
       </section>
     </main>

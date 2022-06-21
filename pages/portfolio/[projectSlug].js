@@ -65,7 +65,7 @@ const Project = ({ project }) => {
           <div className="flex flex-wrap justify-center mt-8 gap-4">
             {project.technologies.map((tech) => (
               <>
-                <div key={tech.name} className="relative bg-base-content text-base-100 pr-2 mt-5 rounded-md min-w-max">
+                <div key={`${project.title}-tech-${tech.name}`} className="cursor-pointer border-2 border-primary text-base-100 font-bold relative bg-primary  pr-2 mt-5 rounded-md min-w-max">
                   <div style={{ backgroundColor: tech.bg_color }} className="flex justify-center items-center absolute -left-2 -top-3 h-12 w-12 rounded-md">
                     <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} />
                   </div>
@@ -80,7 +80,7 @@ const Project = ({ project }) => {
           <div className="mt-8">
             <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
               {project.images.map((image, index) => (
-                <SplideSlide key={`image-${index + 1}`}>
+                <SplideSlide key={`${project.title}-image-${index + 1}`}>
                   <img className="w-full h-80" src={image} alt={`Project ${index + 1}`} />
                 </SplideSlide>
               ))}
