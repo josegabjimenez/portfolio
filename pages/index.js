@@ -17,7 +17,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-primary text-center">Welcome to my portfolio!</h1>
         <div className="bg-red-500 w-32 h-28 rounded-full relative mt-12">
           <div className="absolute -bottom-2">
-            <Image src={avatar} width={200} height={200} />
+            <Image src={avatar} width={200} height={200} alt="Jose Gabriel's Cartoon Picture" />
           </div>
         </div>
       </section>

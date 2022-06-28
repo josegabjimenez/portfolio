@@ -16,12 +16,12 @@ const Navbar = () => {
       name: 'About',
     },
     {
-      path: '/skills',
-      name: 'Skills',
-    },
-    {
       path: '/portfolio',
       name: 'Portfolio',
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
     },
   ];
 
