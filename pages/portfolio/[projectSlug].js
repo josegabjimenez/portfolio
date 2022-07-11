@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import endPoints from '@services/endPoints';
 import useWindowSize from '@hooks/useWindowSize';
 import { Hero } from '@components/index';
@@ -67,7 +68,10 @@ const Project = ({ project }) => {
               <>
                 <div key={`${project.title}-tech-${tech.name}`} className="cursor-pointer border-2 border-primary text-base-100 font-bold relative bg-primary  pr-2 mt-5 rounded-md min-w-max">
                   <div style={{ backgroundColor: tech.bg_color }} className="flex justify-center items-center absolute -left-2 -top-3 h-12 w-12 rounded-md">
-                    <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} />
+                    <div className="flex justify-center items-center w-11/12 object-cover h-11/12">
+                      <Image width="100%" height="100%" className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} />
+                    </div>
+                    {/* <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} /> */}
                   </div>
                   <p className="ml-12">{tech.name}</p>
                 </div>
