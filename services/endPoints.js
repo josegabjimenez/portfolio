@@ -5,6 +5,9 @@ const endPoints = {
     getAll: `${API}/projects`,
     get: (id) => `${API}/projects/${id}`,
   },
+  skills: {
+    getAll: `${API}/skills`,
+  },
 };
 
 export default endPoints;
