@@ -12,7 +12,7 @@ const Hero = ({ data }) => {
       <div className="hero-overlay bg-opacity-80 " />
       <div className="hero-content text-center">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">{data.title}</h1>
+          <h1 className="mb-5 text-5xl font-black italic">{data.title}</h1>
         </div>
       </div>
     </section>
