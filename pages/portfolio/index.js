@@ -10,26 +10,9 @@ const Portfolio = ({ projects }) => {
       <section className="flex flex-wrap justify-center gap-4 w-4/5 ">
         {/* {console.log(projects)} */}
         {projects.map((project) => (
-          <>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-            <div key={project.title}>
-              <Card project={project} />
-            </div>
-          </>
+          <div key={project.title}>
+            <Card project={project} />
+          </div>
         ))}
       </section>
     </main>

@@ -9,7 +9,7 @@ const About = ({ skills }) => {
   return (
     <section className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2">
       <div>
-        <div className="w-[300px]">
+        <div className="w-[300px] ">
           {/* <img src={avatar} alt="Jose Gabriel's Face" /> */}
           {/* <Image src={ProfilePicture} width={size.width * 0.25} height={size.height * 0.5} alt="Jose Gabriel's Cartoon Picture" /> */}
           <Image src={ProfilePicture} width="100%" height="100%" layout="responsive" objectFit="contain" alt="Jose Gabriel's Cartoon Picture" />
