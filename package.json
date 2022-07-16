@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.6.2",
     "@splidejs/react-splide": "^0.7.8",
     "daisyui": "^2.15.0",
     "firebase": "^9.8.1",

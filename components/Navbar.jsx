@@ -26,7 +26,7 @@ const Navbar = () => {
   ];
 
   const onChangeNavBar = () => {
-    if (window.scrollY >= 90) {
+    if (window.scrollY >= 45) {
       setChangeNavBar(true);
     } else {
       setChangeNavBar(false);
