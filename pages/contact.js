@@ -15,13 +15,13 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs.sendForm(process.env.NEXT_PUBLIC_MAIL_SERVICE_ID, process.env.NEXT_PUBLIC_MAIL_TEMPLATE_ID, form.current, process.env.NEXT_PUBLIC_MAIL_USER_ID).then(
-      (result) => {
+      () => {
         setAlert({
           active: true,
           type: 'success',
         });
       },
-      (error) => {
+      () => {
         setAlert({
           active: true,
           type: 'error',
@@ -55,15 +55,18 @@ const Contact = () => {
       <div className="sm:text-left text-center ">
         <h1 className="sm:text-7xl text-5xl font-extrabold">Send me an email ✉</h1>
         <form ref={form} onSubmit={handleSubmit} className="form-control w-full">
-          <label className="label mt-2">
+          {/* User name */}
+          <label htmlFor="user_name" className="label mt-2">
             <span className="label-text">What is your name?</span>
           </label>
           <input type="text" name="user_name" placeholder="Name here" className="input input-bordered w-full" />
-          <label className="label mt-2">
+          {/* User email */}
+          <label htmlFor="user_email" className="label mt-2">
             <span className="label-text">What is your email?</span>
           </label>
           <input type="text" name="user_email" placeholder="Email here" className="input input-bordered w-full" />
-          <label className="label mt-2">
+          {/* Message */}
+          <label htmlFor="message" className="label mt-2">
             <span className="label-text">Text me</span>
           </label>
           <textarea className="textarea textarea-bordered" name="message" placeholder="Message" defaultValue={''} />

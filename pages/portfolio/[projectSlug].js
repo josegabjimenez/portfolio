@@ -89,6 +89,9 @@ const Project = ({ project }) => {
             <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
               {project.images.map((image, index) => (
                 <SplideSlide key={`${project.title}-image-${index + 1}`}>
+                  {/* <div className="w-full h-80">
+                    <Image width="100%" height="100%" layout="responsive" objectFit="contain" src={image} alt={`Project ${index + 1}`} />
+                  </div> */}
                   <img className="w-full h-80" src={image} alt={`Project ${index + 1}`} />
                 </SplideSlide>
               ))}

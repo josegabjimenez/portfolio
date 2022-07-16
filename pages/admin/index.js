@@ -8,14 +8,14 @@ import { useRouter } from 'next/router';
 
 const Admin = () => {
   const router = useRouter();
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     if (!user) {
       logOut();
       router.push('/admin/auth');
     }
-  }, [user]);
+  }, [user, router]);
 
   if (loading || !user) {
     return <p>Loading...</p>;

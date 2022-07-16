@@ -5,13 +5,13 @@ import { useRouter } from 'next/router';
 
 const Auth = () => {
   const router = useRouter();
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     if (user) {
       user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL ? router.push('/admin') : logOut();
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <main>

@@ -8,7 +8,7 @@ const Hero = ({ data }) => {
       {/* <div className="w-full absolute -z-[1] blur-sm">
         <Image width="100%" height="100%" layout="fill" src={data.images[0]} alt="Project Background Image" />
       </div> */}
-      <img className="w-full absolute -z-[1] blur-sm" src={data.images[0]} alt="Project Background Image" />
+      <img className="w-full absolute -z-[1] blur-sm" src={data.images[0]} alt="Project Background" />
       <div className="hero-overlay bg-opacity-80 " />
       <div className="hero-content text-center">
         <div className="max-w-md">
