@@ -2,11 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import ProfilePicture from '@assets/images/ProfilePicture.JPEG';
-// import useWindowSize from '@hooks/useWindowSize';
-import endPoints from '@services/endPoints';
+
+// API
+// import endPoints from '@services/endPoints';
+import { getSkills } from '@pages/api/skills/index';
 
 const About = ({ skills }) => {
-  // const size = useWindowSize();
   return (
     <section className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2">
       <Head>
@@ -41,8 +42,9 @@ const About = ({ skills }) => {
 
 // Page props
 export const getStaticProps = async () => {
-  const res = await fetch(endPoints.skills.getAll);
-  const { skills } = await res.json();
+  const skills = await getSkills();
+  // const res = await fetch(endPoints.skills.getAll);
+  // const { skills } = await res.json();
   return {
     props: {
       skills,

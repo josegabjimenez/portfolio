@@ -44,3 +44,5 @@ export default async function handler(req, res) {
   const project = await getProject(projectSlug);
   res.status(200).json({ project });
 }
+
+export { getProject };

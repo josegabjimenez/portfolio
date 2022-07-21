@@ -1,7 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import endPoints from '@services/endPoints';
 import { Card } from '@components/index';
+
+// API
+// import endPoints from '@services/endPoints';
+import { getProjects } from '@pages/api/projects/index';
 
 const Portfolio = ({ projects }) => {
   return (
@@ -26,13 +29,18 @@ const Portfolio = ({ projects }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(endPoints.projects.getAll);
-  const { projects } = await res.json();
-  return {
-    props: {
-      projects,
-    }, // will be passed to the page component as props
-  };
+  try {
+    const projects = await getProjects();
+    // const res = await fetch(endPoints.projects.getAll);
+    // const { projects } = await res.json();
+    return {
+      props: {
+        projects: JSON.parse(JSON.stringify(projects)),
+      }, // will be passed to the page component as props
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default Portfolio;

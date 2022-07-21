@@ -18,3 +18,5 @@ export default async function handler(req, res) {
   const skills = await getSkills();
   res.status(200).json({ skills });
 }
+
+export { getSkills };

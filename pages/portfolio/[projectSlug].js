@@ -2,16 +2,19 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import endPoints from '@services/endPoints';
 import useWindowSize from '@hooks/useWindowSize';
 import { Hero } from '@components/index';
-// import Carousel from 'react-elastic-carousel';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { Splide, SplideSlide } from '@splidejs/react-splide'; // Carousel
+
+//API
+// import endPoints from '@services/endPoints';
+import { getProject } from '@pages/api/projects/[projectSlug]';
 
 //Icons
 import { MdDone, MdOutlineArrowBack } from 'react-icons/md';
 import { RiToolsFill, RiGithubFill, RiEyeFill } from 'react-icons/ri';
 import '@splidejs/react-splide/css';
+import { getProjects } from '@pages/api/projects/index';
 
 const Project = ({ project }) => {
   const size = useWindowSize();
@@ -114,10 +117,11 @@ const Project = ({ project }) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(endPoints.projects.getAll);
-  const data = await res.json();
+  const projects = await getProjects();
+  // const res = await fetch(endPoints.projects.getAll);
+  // const data = await res.json();
 
-  const paths = data.projects.map((project) => {
+  const paths = projects.map((project) => {
     return {
       params: {
         projectSlug: project.slug,
@@ -133,11 +137,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { projectSlug } = params;
-  const res = await fetch(endPoints.projects.get(projectSlug));
-  const { project } = await res.json();
+  const project = await getProject(projectSlug);
+  // const res = await fetch(endPoints.projects.get(projectSlug));
+  // const { project } = await res.json();
   return {
     props: {
-      project,
+      project: JSON.parse(JSON.stringify(project)),
     },
   };
 };
