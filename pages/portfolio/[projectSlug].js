@@ -87,14 +87,14 @@ const Project = ({ project }) => {
 
           {/* Images carousel */}
           <h3 className="text-2xl font-bold mt-10">Some images</h3>
-          <div className="mt-8">
+          <div className="mt-8 text-center">
             <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
               {project.images.map((image, index) => (
                 <SplideSlide key={`${project.title}-image-${index + 1}`}>
                   {/* <div className="w-full h-80">
                     <Image width="100%" height="100%" layout="responsive" objectFit="contain" src={image} alt={`Project ${index + 1}`} />
                   </div> */}
-                  <img className="w-full h-80" src={image} alt={`Project ${index + 1}`} />
+                  <img className="max-w-ful h-auto" src={image} alt={`Project ${index + 1}`} />
                 </SplideSlide>
               ))}
             </Splide>

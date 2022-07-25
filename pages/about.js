@@ -28,11 +28,15 @@ const About = ({ skills }) => {
         {/* Skills images */}
         <p className="font-bold text-md mt-8">Skills</p>
         <div className="flex gap-4 mb-8 mt-2 justify-center sm:justify-start flex-wrap">
-          {skills.map((skill) => (
-            <div key={skill.id} style={{ backgroundColor: skill.bg_color }} className={`rounded-md w-12 flex justify-center items-center p-1`}>
-              <Image width="100%" height="100%" src={skill.image} alt={`${skill.name} technology`} />
-            </div>
-          ))}
+          {skills.map((skill) => {
+            if (skill.id != 'React_tec') {
+              return (
+                <div key={skill.id} style={{ backgroundColor: skill.bg_color }} className={`rounded-md w-12 flex justify-center items-center p-1`}>
+                  <Image width="100%" height="100%" src={skill.image} alt={`${skill.name} technology`} />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </section>

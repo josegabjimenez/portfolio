@@ -31,7 +31,7 @@ const Card = ({ project }) => {
           </div>
           <div className="flex">
             {project.technologies.map((technology) => (
-              <div key={`${project.title}-tech-${technology.name}-preview`} className="w-8 h-8 object-cover rounded-md overflow-hidden">
+              <div key={`${project.title}-tech-${technology.name}-preview`} className="w-9 h-9 p-1 rounded-md overflow-hidden mr-1">
                 <Image width="100%" height="100%" className="w-full" src={technology.image} alt={`${technology.name} used`} />
               </div>
             ))}
