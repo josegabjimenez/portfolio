@@ -131,7 +131,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
@@ -144,6 +144,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       project: JSON.parse(JSON.stringify(project)),
     },
+    revalidate: 60, // This will re-generate the page if there is a new request each 60 seconds
   };
 };
 

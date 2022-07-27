@@ -37,6 +37,7 @@ export const getStaticProps = async () => {
       props: {
         projects: JSON.parse(JSON.stringify(projects)),
       }, // will be passed to the page component as props
+      revalidate: 60,
     };
   } catch (err) {
     console.log(err);
