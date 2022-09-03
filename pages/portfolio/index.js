@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import { Card } from '@components/index';
+
+// Animations
+import { gsap } from "gsap";
 
 // API
 // import endPoints from '@services/endPoints';
 import { getProjects } from '@pages/api/projects/index';
 
 const Portfolio = ({ projects }) => {
+
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+      gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+  }, []);
+
   return (
-    <main className="flex flex-col justify-center items-center my-12">
+    <main ref={sectionRef} className="flex flex-col justify-center items-center my-12">
       <Head>
         <title>My projects 🔨</title>
         <meta name="description" content="All my projects" />

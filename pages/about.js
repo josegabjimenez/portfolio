@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import ProfilePicture from '@assets/images/ProfilePicture.JPEG';
+
+// Animations
+import { gsap } from "gsap";
 
 // API
 // import endPoints from '@services/endPoints';
 import { getSkills } from '@pages/api/skills/index';
 
 const About = ({ skills }) => {
+
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+      gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+  }, []);
+
   return (
-    <section className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2">
+    <section ref={sectionRef} className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2">
       <Head>
         <title>About me ☕</title>
         <meta name="description" content="About me page" />

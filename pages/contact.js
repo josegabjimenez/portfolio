@@ -2,9 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
 import emailjs from '@emailjs/browser';
 
+// Animations
+import { gsap } from "gsap";
+
+// Icons
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Contact = () => {
+  const sectionRef = useRef(null);
   const form = useRef();
   const [alert, setAlert] = useState({
     active: false,
@@ -45,8 +50,14 @@ const Contact = () => {
     }
   }, [alert]);
 
+  
+  //Animation intro
+  useEffect(() => {
+      gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+  }, []);
+
   return (
-    <section className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2 my-12">
+    <section ref={sectionRef} className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2 my-12">
       <Head>
         <title>Contact me 📲</title>
         <meta name="description" content="Page to contact me" />
