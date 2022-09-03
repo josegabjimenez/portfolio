@@ -103,7 +103,7 @@ const Project = ({ project }) => {
       </section>
 
       {/* Some styles in JSX */}
-      <style jsx>
+      <style>
         {`
           .content {
             margin-top: ${Math.floor(size.height * 0.45)}px;
