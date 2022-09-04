@@ -25,7 +25,7 @@ module.exports = {
   ],
   //plugins: ["react"],
   rules: {
-    "react/no-unescaped-entities": "off",
+    "react/no-unknown-property": "off",
     "@next/next/no-page-custom-font": "off",
     semi: ['error', 'always'],
   },
