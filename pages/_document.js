@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="description" content="Jose Gabriel's Portfolio" />
-          <link rel="icon" href="/coding.png" />
+          <link rel="icon" href="/logo-bg.svg" />
         </Head>
         <body>
           <Main />

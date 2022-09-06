@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { CgCodeSlash } from 'react-icons/cg';
 import { RiDownloadCloudLine } from 'react-icons/ri';
@@ -62,7 +63,9 @@ const Navbar = () => {
           {/* Code Logo */}
           {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
           <div className="lg:block hidden text-primary text-7xl p-0 m-0">
-            <CgCodeSlash />
+            <div>
+              <Image src="/logo.svg" width="100%" height="50%" layout="intrinsic" />
+            </div>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
