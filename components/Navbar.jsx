@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CgCodeSlash } from 'react-icons/cg';
+// import { CgCodeSlash } from 'react-icons/cg';
 import { RiDownloadCloudLine } from 'react-icons/ri';
 
 const Navbar = () => {
