@@ -34,7 +34,7 @@ const About = ({ skills }) => {
 
       <div className="max-w-screen-sm sm:text-left text-center">
         <h1 className="text-5xl sm:text-7xl font-extrabold">About</h1>
-        <p className="text-xl mt-2">I&apos;m a tech and software enthusiast, who loves to code 💻, do web development, do exercise 💪🏽, and drink coffee ☕</p>
+        <p className="text-xl mt-2">In short words, I&apos;m a tech and software enthusiast, who loves to code 💻, do web or mobile development, do exercise 💪🏽 and drink coffee ☕</p>
         {/* Skills images */}
         <p className="font-bold text-md mt-8">Skills</p>
         <div className="flex gap-4 mb-8 mt-2 justify-center sm:justify-start flex-wrap">
