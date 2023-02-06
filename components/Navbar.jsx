@@ -54,7 +54,7 @@ const Navbar = () => {
               {routes.map((route) => (
                 <Link href={route.path} key={route.path}>
                   <li key={`${route.path}-mobile`}>
-                    <p>{route.name}</p>
+                    <p>{route.name}1</p>
                   </li>
                 </Link>
               ))}
@@ -73,7 +73,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">
             {routes.map((route) => (
               <Link href={route.path} key={`${route.path}-desktop`}>
-                <li key={route.path}>
+                <li key={route.path} className="rounded-lg">
                   <p>{route.name}</p>
                 </li>
               </Link>
