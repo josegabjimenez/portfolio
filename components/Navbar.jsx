@@ -54,7 +54,7 @@ const Navbar = () => {
               {routes.map((route) => (
                 <Link href={route.path} key={route.path}>
                   <li key={`${route.path}-mobile`}>
-                    <p>{route.name}1</p>
+                    <p>{route.name}</p>
                   </li>
                 </Link>
               ))}
