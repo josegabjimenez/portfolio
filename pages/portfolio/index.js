@@ -3,18 +3,17 @@ import Head from 'next/head';
 import { Card } from '@components/index';
 
 // Animations
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
 // API
 // import endPoints from '@services/endPoints';
 import { getProjects } from '@pages/api/projects/index';
 
 const Portfolio = ({ projects }) => {
-
   const sectionRef = useRef(null);
 
   useEffect(() => {
-      gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
   }, []);
 
   return (
@@ -39,9 +38,12 @@ const Portfolio = ({ projects }) => {
 
 export const getStaticProps = async () => {
   try {
+    // Get projects from API
     const projects = await getProjects();
-    // const res = await fetch(endPoints.projects.getAll);
-    // const { projects } = await res.json();
+
+    // Sort projects by rating
+    projects.sort((a, b) => b.rating - a.rating);
+
     return {
       props: {
         projects: JSON.parse(JSON.stringify(projects)),
