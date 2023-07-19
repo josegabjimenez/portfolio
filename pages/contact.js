@@ -3,7 +3,7 @@ import Head from 'next/head';
 import emailjs from '@emailjs/browser';
 
 // Animations
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
 // Icons
 import { AiOutlineClose } from 'react-icons/ai';
@@ -19,7 +19,15 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(process.env.NEXT_PUBLIC_MAIL_SERVICE_ID, process.env.NEXT_PUBLIC_MAIL_TEMPLATE_ID, form.current, process.env.NEXT_PUBLIC_MAIL_USER_ID).then(
+    const templateID = process.env.NEXT_PUBLIC_MAIL_TEMPLATE_ID;
+    const serviceID = process.env.NEXT_PUBLIC_MAIL_SERVICE_ID;
+    const userID = process.env.NEXT_PUBLIC_MAIL_USER_ID;
+
+    // console.log('Template ID: ', templateID);
+    // console.log('Service ID: ', serviceID);
+    // console.log('User ID: ', userID);
+
+    emailjs.sendForm(serviceID, templateID, form.current, userID).then(
       () => {
         setAlert({
           active: true,
@@ -50,10 +58,9 @@ const Contact = () => {
     }
   }, [alert]);
 
-  
   //Animation intro
   useEffect(() => {
-      gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
   }, []);
 
   return (
