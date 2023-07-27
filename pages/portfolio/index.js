@@ -20,7 +20,7 @@ const Portfolio = ({ projects }) => {
     <main ref={sectionRef} className="flex flex-col justify-center items-center my-12">
       <Head>
         <title>My projects 🔨</title>
-        <meta name="description" content="All my projects" />
+        <meta name="description" content="All the projects I've done. Made with 💓 by @josegabjimenez." />
       </Head>
       <h1 className="text-5xl sm:text-7xl mb-8 font-extrabold">Projects 🔨</h1>
       {/* <section className="grid grid-flow-col auto-cols-max gap-4 w-4/5 "> */}

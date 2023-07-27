@@ -67,9 +67,9 @@ const Contact = () => {
     <section ref={sectionRef} className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2 my-12">
       <Head>
         <title>Contact me 📲</title>
-        <meta name="description" content="Page to contact me" />
+        <meta name="description" content="Page to contact me @josegabjimenez" />
       </Head>
-      <div className="sm:text-left text-center ">
+      <article className="sm:text-left text-center ">
         <h1 className="sm:text-7xl text-5xl font-extrabold">Send me an email ✉</h1>
         <form ref={form} onSubmit={handleSubmit} className="form-control w-full">
           {/* User name */}
@@ -119,7 +119,7 @@ const Contact = () => {
             </div>
           )
         ) : null}
-      </div>
+      </article>
     </section>
   );
 };

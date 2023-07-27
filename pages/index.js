@@ -24,14 +24,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <Head>
         <title>Hi, I&apos;m Jose 🧑🏽</title>
-        <meta name="description" content="Welcome to my website! I'm Jose Gabriel Jiménez Vidales" />
+        <meta name="description" content="Welcome to my website! I'm Jose Gabriel Jiménez Vidales, also known as @josegabjimenez or @josegab.dev" />
         <link rel="icon" href="/coding.png" />
       </Head>
 
-      <section className="intro flex flex-col justify-center items-center mt-12 mb-12">
+      <article className="intro flex flex-col justify-center items-center mt-12 mb-12">
         <h1 ref={titleRef} className="text-2xl text-center">
           Hi, I&apos;m <span className="text-primary font-bold underline cursor-pointer">Jose Gabriel Jiménez</span>
         </h1>
@@ -43,7 +43,7 @@ export default function Home() {
             <Image src={avatar} width={200} height={200} alt="Jose Gabriel's Cartoon Picture" />
           </div>
         </div>
-      </section>
+      </article>
       {/* <style jsx>{`
         h1 {
           text-align: center;
@@ -51,6 +51,6 @@ export default function Home() {
           margin-top: 40px;
         }
       `}</style> */}
-    </div>
+    </section>
   );
 }
