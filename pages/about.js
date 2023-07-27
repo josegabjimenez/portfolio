@@ -21,16 +21,16 @@ const About = ({ skills }) => {
       {/* Metadata */}
       <Head>
         <title>About me ☕</title>
-        <meta name="description" content="About me page" />
+        <meta name="description" content="About me page, this page includes information about @josegabjimenez, @josegab.dev, Jose Gabriel Jiménez Vidales" />
       </Head>
 
       {/* Profile Photo */}
       <section style={{ minWidth: '200px' }} className="w-[300px] sm:w-[200px] lg:w-[300px] rounded-full bg-red-500 overflow-hidden">
-        <Image src={ProfilePicture} width="100%" height="100%" layout="responsive" objectFit="cover" alt="Jose Gabriel's Cartoon Picture" />
+        <Image src={ProfilePicture} width="100%" height="100%" layout="responsive" objectFit="cover" alt="Jose Gabriel Jiménez's Picture" />
       </section>
 
       {/* About me text */}
-      <section className="max-w-screen-sm sm:text-left text-center">
+      <article className="max-w-screen-sm sm:text-left text-center">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold">About</h1>
         <p className="text-md md:text-lg lg:text-xl mt-2">
           I&apos;m a tech and software enthusiast deeply passionate about coding 💻, with expertise in web and mobile app development 📱. Alongside my love for technology, I prioritize a healthy
@@ -50,7 +50,7 @@ const About = ({ skills }) => {
             }
           })}
         </div>
-      </section>
+      </article>
     </section>
   );
 };
