@@ -33,9 +33,9 @@ const About = ({ skills }) => {
       <section className="max-w-screen-sm sm:text-left text-center">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold">About</h1>
         <p className="text-md md:text-lg lg:text-xl mt-2">
-          I'm a tech and software enthusiast deeply passionate about coding 💻, with expertise in web and mobile app development 📱. Alongside my love for technology, I prioritize a healthy lifestyle
-          💪🏽 and regularly engage in exercise and outdoor activities. As I fuel my creativity and zest for life with a cup of coffee ☕, I'm committed to continuous growth and innovation in the
-          ever-evolving tech world.
+          I&apos;m a tech and software enthusiast deeply passionate about coding 💻, with expertise in web and mobile app development 📱. Alongside my love for technology, I prioritize a healthy
+          lifestyle 💪🏽 and regularly engage in exercise and outdoor activities. As I fuel my creativity and zest for life with a cup of coffee ☕, I&apos;m committed to continuous growth and
+          innovation in the ever-evolving tech world.
         </p>
         {/* Skills images */}
         <p className="font-bold text-md mt-8">Skills</p>

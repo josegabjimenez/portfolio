@@ -33,7 +33,7 @@ export default function Home() {
 
       <section className="intro flex flex-col justify-center items-center mt-12 mb-12">
         <h1 ref={titleRef} className="text-2xl text-center">
-          Hi, I'm <span className="text-primary font-bold underline cursor-pointer">Jose Gabriel Jiménez</span>
+          Hi, I&apos;m <span className="text-primary font-bold underline cursor-pointer">Jose Gabriel Jiménez</span>
         </h1>
         <h2 ref={subtitleRef} className="text-4xl font-bold text-center">
           Full-Stack Developer
