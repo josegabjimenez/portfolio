@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { RiDownloadCloudLine } from 'react-icons/ri';
 
 const Navbar = () => {
+  // States
   const [changeNavBar, setChangeNavBar] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const routes = [
     {
       path: '/',
@@ -45,21 +48,28 @@ const Navbar = () => {
         <div className="navbar-start ml-4">
           {/* Mobile Menu */}
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label className="btn btn-ghost lg:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow-2xl bg-base-100 rounded-box w-52">
-              {routes.map((route) => (
-                <Link href={route.path} key={route.path}>
-                  <li key={`${route.path}-mobile`}>
-                    <p>{route.name}</p>
-                  </li>
-                </Link>
-              ))}
-            </ul>
+            {isMobileMenuOpen && (
+              <>
+                {/* Overlay to close mobile menu dropdown when it's opened*/}
+                <div className="absolute -top-5 -left-5 w-screen h-screen cursor-pointer" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}></div>
+                <ul className="absolute menu menu-compact -left-2  p-2 shadow-2xl shadow-black bg-base-100 rounded-box w-52">
+                  {routes.map((route) => (
+                    <Link href={route.path} key={route.path}>
+                      <li key={`${route.path}-mobile`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                        <p>{route.name}</p>
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
+
           {/* Code Logo */}
           {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
           <div className="lg:block hidden text-primary text-7xl p-0 m-0">
