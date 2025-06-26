@@ -73,8 +73,8 @@ const Navbar = () => {
           {/* Code Logo */}
           {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
           <div className="lg:block hidden text-primary text-7xl p-0 m-0">
-            <div>
-              <Image src="/logo.svg" width="100%" height="50%" layout="intrinsic" />
+            <div className="relative w-16 h-16">
+              <Image src="/logo.svg" fill alt="josegabjimenez.dev Logo" />
             </div>
           </div>
         </div>

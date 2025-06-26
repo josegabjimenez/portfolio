@@ -29,10 +29,10 @@ const Card = ({ project }) => {
               </div>
             )}
           </div>
-          <div className="flex">
+          <div className="flex flex-wrap gap-2 items-center">
             {project.technologies.map((technology) => (
-              <div key={`${project.title}-tech-${technology.name}-preview`} className="w-9 h-9 p-1 rounded-md overflow-hidden mr-1">
-                <Image width="100%" height="100%" className="w-full" src={technology.image} alt={`${technology.name} used`} />
+              <div key={`${project.title}-tech-${technology.name}-preview`} className="relative w-6 h-6 rounded-md">
+                <Image src={technology.image} fill alt={`${technology.name} used`} className="object-contain" />
               </div>
             ))}
           </div>

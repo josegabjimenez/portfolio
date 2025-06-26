@@ -73,14 +73,18 @@ const Project = ({ project }) => {
           <h3 className="text-2xl font-bold mt-8">Technologies used</h3>
           <div className="flex flex-wrap justify-center mt-8 gap-4">
             {project.technologies.map((tech) => (
-              <div key={`${project.title}-tech-${tech.name}`} className="cursor-pointer border-2 border-primary text-base-100 font-bold relative bg-primary  pr-2 mt-5 rounded-md min-w-max">
+              <div
+                key={`${project.title}-tech-${tech.name}`}
+                style={{ borderColor: tech.bg_color }}
+                className={`cursor-pointer border-2 text-base-100 font-bold relative  pr-2 mt-5 rounded-md min-w-max`}
+              >
                 <div style={{ backgroundColor: tech.bg_color }} className="flex justify-center items-center absolute -left-2 -top-3 h-12 w-12 rounded-md">
-                  <div className="flex justify-center items-center w-11/12 object-cover h-11/12">
-                    <Image width="100%" height="100%" className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} />
+                  <div className="relative w-11/12 object-cover h-11/12 p-4">
+                    <Image fill className="object-contain" src={tech.image} alt={`${tech.name} technology`} />
                   </div>
                   {/* <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} /> */}
                 </div>
-                <p className="ml-12">{tech.name}</p>
+                <p className="ml-12 text-white">{tech.name}</p>
               </div>
             ))}
           </div>

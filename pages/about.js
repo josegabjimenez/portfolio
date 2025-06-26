@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
-import ProfilePicture from '@assets/images/ProfilePicture.JPEG';
+import ProfilePicture from '@assets/images/Photo.jpg';
 
 // Animations
 import { gsap } from 'gsap';
@@ -25,8 +25,8 @@ const About = ({ skills }) => {
       </Head>
 
       {/* Profile Photo */}
-      <section style={{ minWidth: '200px' }} className="w-[300px] sm:w-[200px] lg:w-[300px] rounded-full bg-red-500 overflow-hidden">
-        <Image src={ProfilePicture} width="100%" height="100%" layout="responsive" objectFit="cover" alt="Jose Gabriel Jiménez's Picture" />
+      <section style={{ minWidth: '200px' }} className="relative w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] rounded-full overflow-hidden">
+        <Image src={ProfilePicture} fill alt="Jose Gabriel Jiménez's Picture" className="object-cover" />
       </section>
 
       {/* About me text */}
@@ -43,8 +43,8 @@ const About = ({ skills }) => {
           {skills.map((skill) => {
             if (skill.id != 'React_tec') {
               return (
-                <div key={skill.id} style={{ backgroundColor: skill.bg_color }} className={`rounded-md w-10 lg:w-12 flex justify-center items-center p-1`}>
-                  <Image width="100%" height="100%" src={skill.image} alt={`${skill.name} technology`} />
+                <div key={skill.id} style={{ backgroundColor: skill.bg_color }} className={`relative rounded-md w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center`}>
+                  <Image src={skill.image} fill alt={`${skill.name} technology`} className="p-1 object-contain" />
                 </div>
               );
             }
