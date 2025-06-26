@@ -6,7 +6,7 @@ const Footer = () => {
   const year = date.getFullYear();
   const links = {
     github: 'https://github.com/josegabjimenez',
-    linkedin: 'https://www.linkedin.com/in/jose-gabriel-jim%C3%A9nez-vidales-1b0179215/',
+    linkedin: 'https://www.linkedin.com/in/josegabjimenez',
     email: 'mailto:josegabojimenez@gmail.com',
   };
   return (
