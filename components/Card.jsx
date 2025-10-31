@@ -10,9 +10,8 @@ const Card = ({ project }) => {
   return (
     <Link href={`/portfolio/${project.slug}`}>
       <div className="z-0 card w-80 transition-all cursor-pointer opacity-60 hover:opacity-100 shadow-xl border-2 border-base-100 hover:border-primary">
-        <figure>
-          <img className="max-h-80" src={project.images[0] ? project.images[0] : 'https://api.lorem.space/image/shoes'} alt="Shoes" />
-          {/* <div className="max-h-80"><Image width="100%" height="100%" src={project.images[0] ? project.images[0] : 'https://api.lorem.space/image/shoes'} alt="Shoes" /></div> */}
+        <figure className="w-80 h-48 overflow-hidden bg-base-200">
+          <img className="w-full h-full object-cover" src={project.images[0] ? project.images[0] : 'https://api.lorem.space/image/shoes'} alt={project.title || 'Project image'} />
         </figure>
         <div className="card-body">
           <div className="flex justify-between items-end w-full">

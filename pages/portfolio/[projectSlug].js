@@ -18,6 +18,31 @@ import { getProjects } from '@pages/api/projects/index';
 
 const Project = ({ project }) => {
   const size = useWindowSize();
+  const [maxSlideHeight, setMaxSlideHeight] = React.useState(0);
+  const carouselRef = React.useRef(null);
+
+  const recalcMaxSlideHeight = React.useCallback(() => {
+    if (!carouselRef.current) return;
+    const imgs = carouselRef.current.querySelectorAll('img');
+    let max = 0;
+    imgs.forEach((img) => {
+      if (img.complete) {
+        max = Math.max(max, img.clientHeight);
+      }
+    });
+    if (max > 0) setMaxSlideHeight(max);
+  }, []);
+
+  React.useEffect(() => {
+    const onResize = () => recalcMaxSlideHeight();
+    window.addEventListener('resize', onResize);
+    // Initial calc once images/layout settle
+    const id = setTimeout(recalcMaxSlideHeight, 0);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(id);
+    };
+  }, [recalcMaxSlideHeight]);
   // console.log(project);
   return (
     <main className="flex flex-col justify-center items-center">
@@ -91,14 +116,14 @@ const Project = ({ project }) => {
 
           {/* Images carousel */}
           <h3 className="text-2xl font-bold mt-10">Some images</h3>
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-center" ref={carouselRef}>
             <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
               {project.images.map((image, index) => (
                 <SplideSlide key={`${project.title}-image-${index + 1}`}>
-                  {/* <div className="w-full h-80">
-                    <Image width="100%" height="100%" layout="responsive" objectFit="contain" src={image} alt={`Project ${index + 1}`} />
-                  </div> */}
-                  <img className="max-w-ful h-auto" src={image} alt={`Project ${index + 1}`} />
+                  <div className="w-full bg-base-200 flex items-center justify-center overflow-hidden" style={{ height: maxSlideHeight ? `${maxSlideHeight}px` : undefined }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img onLoad={recalcMaxSlideHeight} className="max-w-full max-h-full object-contain" src={image} alt={`Project ${index + 1}`} />
+                  </div>
                 </SplideSlide>
               ))}
             </Splide>
