@@ -23,7 +23,7 @@ module.exports = {
         display: ['Playfair Display', 'serif'],
       },
       animation: {
-        'float': 'float 8s ease-in-out infinite',
+        float: 'float 8s ease-in-out infinite',
         'float-slow': 'float 12s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
         'fade-in': 'fadeIn 0.5s ease-out forwards',

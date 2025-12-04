@@ -25,7 +25,7 @@ const About = ({ skills }) => {
       </Head>
 
       {/* Profile Photo */}
-      <section style={{ minWidth: '200px' }} className="relative w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] rounded-full overflow-hidden">
+      <section style={{ minWidth: '200px' }} className="relative w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] rounded-full overflow-hidden glass-card">
         <Image src={ProfilePicture} fill alt="Jose Gabriel Jiménez's Picture" className="object-cover" />
       </section>
 

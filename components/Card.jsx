@@ -9,7 +9,7 @@ import { RiToolsFill } from 'react-icons/ri';
 const Card = ({ project }) => {
   return (
     <Link href={`/portfolio/${project.slug}`}>
-      <div className="z-0 card w-80 transition-all cursor-pointer opacity-60 hover:opacity-100 shadow-xl border-2 border-base-100 hover:border-primary">
+      <div className="glass-card overflow-hidden z-0 card w-80 transition-all cursor-pointer opacity-60 hover:opacity-100 shadow-xl border-2 border-base-100 hover:border-primary">
         <figure className="w-80 h-48 overflow-hidden bg-base-200">
           <img className="w-full h-full object-cover" src={project.images[0] ? project.images[0] : 'https://api.lorem.space/image/shoes'} alt={project.title || 'Project image'} />
         </figure>

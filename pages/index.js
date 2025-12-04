@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import ParticlesBackground from '@components/Particles';
 import { HiOutlineCode, HiOutlineSparkles, HiOutlineCube } from 'react-icons/hi';
 import { RiArrowRightLine } from 'react-icons/ri';
 
@@ -17,7 +16,6 @@ export default function Home() {
   const descriptionRef = useRef(null);
   const servicesRef = useRef(null);
   const ctaRef = useRef(null);
-  const orbsRef = useRef([]);
 
   const services = [
     {
@@ -42,23 +40,6 @@ export default function Home() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Animate floating orbs
-      orbsRef.current.forEach((orb, i) => {
-        if (orb) {
-          gsap.fromTo(
-            orb,
-            { opacity: 0, scale: 0 },
-            {
-              opacity: 0.3,
-              scale: 1,
-              duration: 1.5,
-              delay: i * 0.2,
-              ease: 'elastic.out(1, 0.5)',
-            }
-          );
-        }
-      });
-
       // Main content animation
       tl.fromTo(titleRef.current, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 1 })
         .fromTo(subtitleRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
@@ -78,23 +59,8 @@ export default function Home() {
         <link rel="icon" href="/coding.png" />
       </Head>
 
-      {/* Particles Background */}
-      <ParticlesBackground />
-
-      {/* Background Gradient Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Primary glow orb - top right */}
-        <div ref={(el) => (orbsRef.current[0] = el)} className="glow-orb glow-primary w-[500px] h-[500px] -top-48 -right-48 animate-pulse-glow" />
-        {/* White glow orb - left center */}
-        <div ref={(el) => (orbsRef.current[1] = el)} className="glow-orb glow-white w-[300px] h-[300px] top-1/3 -left-32 animate-float" />
-        {/* Small primary orb - bottom left */}
-        <div ref={(el) => (orbsRef.current[2] = el)} className="glow-orb glow-primary w-[200px] h-[200px] bottom-48 left-1/4 animate-float-delayed" />
-        {/* White orb - bottom right */}
-        <div ref={(el) => (orbsRef.current[3] = el)} className="glow-orb glow-white w-[250px] h-[250px] bottom-20 right-1/4 opacity-20 animate-float" />
-      </div>
-
       {/* Hero Section */}
-      <section ref={heroRef} className="relative z-10 min-h-[calc(100vh-6rem)] flex items-center justify-center px-6">
+      <section ref={heroRef} className="relative z-10 min-h-[calc(100vh-10rem)] flex items-center justify-center px-6 py-12">
         <div className="max-w-5xl mx-auto text-center">
           {/* Main Title */}
           <h1 ref={titleRef} className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4">

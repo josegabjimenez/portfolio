@@ -19,7 +19,12 @@
   --text-muted: rgba(255, 255, 255, 0.4);
 }
 
-html,
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -27,6 +32,11 @@ body {
   background: var(--dark-bg);
   color: var(--text-primary);
   overflow-x: hidden;
+  min-height: 100%;
+}
+
+#__next {
+  min-height: 100%;
 }
 
 a {
@@ -224,6 +234,129 @@ a {
   pointer-events: none;
 }
 
+/* Blueprint Grid Background */
+.blueprint-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blueprint-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* Fine grid - small squares */
+    linear-gradient(rgba(187, 0, 14, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(187, 0, 14, 0.03) 1px, transparent 1px),
+    /* Medium grid */
+    linear-gradient(rgba(187, 0, 14, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(187, 0, 14, 0.05) 1px, transparent 1px),
+    /* Large grid - main blueprint lines */
+    linear-gradient(rgba(187, 0, 14, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(187, 0, 14, 0.08) 1px, transparent 1px);
+  background-size:
+    /* Fine grid */
+    20px 20px,
+    20px 20px,
+    /* Medium grid */
+    80px 80px,
+    80px 80px,
+    /* Large grid */
+    160px 160px,
+    160px 160px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+/* Grid intersection points - blueprint "nodes" */
+.blueprint-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at center, rgba(187, 0, 14, 0.15) 1px, transparent 1px);
+  background-size: 160px 160px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 10%, transparent 60%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 10%, transparent 60%);
+  animation: gridPulse 8s ease-in-out infinite reverse;
+}
+
+/* Scanning line effect for extra depth */
+.blueprint-scan {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blueprint-scan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(187, 0, 14, 0.02) 50%,
+    transparent 100%
+  );
+  animation: scanLine 12s linear infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Perspective grid lines going to horizon - extra depth layer */
+.blueprint-perspective {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  perspective: 1000px;
+  perspective-origin: 50% 100%;
+  overflow: hidden;
+}
+
+.blueprint-perspective::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 60vh;
+  background-image:
+    linear-gradient(transparent 0%, transparent 49%, rgba(187, 0, 14, 0.06) 50%, transparent 51%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, transparent 49%, rgba(187, 0, 14, 0.04) 50%, transparent 51%, transparent 100%);
+  background-size: 100% 60px, 120px 100%;
+  transform: rotateX(60deg);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to top, black 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 80%);
+  opacity: 0.5;
+}
+
 /* Service Card Hover Effect */
 .service-card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -258,4 +391,79 @@ a {
 
 .nav-link:hover {
   color: var(--primary-light);
+}
+
+/* Navbar Pill Styles */
+.navbar-pill {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 30, 0.9) 0%,
+    rgba(20, 20, 20, 0.95) 50%,
+    rgba(25, 25, 25, 0.9) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.navbar-pill-scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(25, 25, 25, 0.95) 0%,
+    rgba(15, 15, 15, 0.98) 50%,
+    rgba(20, 20, 20, 0.95) 100%
+  );
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-pill {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link-pill::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.nav-link-pill:hover::after {
+  width: 100%;
+}
+
+.nav-link-pill:hover {
+  color: var(--text-primary);
+}
+
+.navbar-cta-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-cta-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Mobile Menu Container */
+.mobile-menu-container {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 25, 0.98) 0%,
+    rgba(15, 15, 15, 0.98) 100%
+  );
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }

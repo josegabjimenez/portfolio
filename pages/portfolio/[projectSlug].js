@@ -116,7 +116,7 @@ const Project = ({ project }) => {
 
           {/* Images carousel */}
           <h3 className="text-2xl font-bold mt-10">Some images</h3>
-          <div className="mt-8 text-center" ref={carouselRef}>
+          <div className="rounded-md glass-card overflow-hidden mt-8 text-center" ref={carouselRef}>
             <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
               {project.images.map((image, index) => (
                 <SplideSlide key={`${project.title}-image-${index + 1}`}>
