@@ -1,106 +1,152 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { CgCodeSlash } from 'react-icons/cg';
-import { RiDownloadCloudLine } from 'react-icons/ri';
+import { gsap } from 'gsap';
+import { RiDownloadCloudLine, RiMenuLine, RiCloseLine } from 'react-icons/ri';
 
 const Navbar = () => {
-  // States
-  const [changeNavBar, setChangeNavBar] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navRef = useRef(null);
+  const logoRef = useRef(null);
+  const linksRef = useRef([]);
+  const ctaRef = useRef(null);
 
   const routes = [
-    {
-      path: '/',
-      name: 'Home',
-    },
-    {
-      path: '/about',
-      name: 'About',
-    },
-    {
-      path: '/portfolio',
-      name: 'Portfolio',
-    },
-    {
-      path: '/contact',
-      name: 'Contact',
-    },
+    { path: '/', name: 'Home' },
+    { path: '/about', name: 'About' },
+    { path: '/portfolio', name: 'Portfolio' },
+    { path: '/contact', name: 'Contact' },
   ];
 
-  const onChangeNavBar = () => {
-    if (window.scrollY >= 45) {
-      setChangeNavBar(true);
-    } else {
-      setChangeNavBar(false);
-    }
-  };
-
+  // Scroll handler
   useEffect(() => {
-    window.addEventListener('scroll', onChangeNavBar);
-    return () => window.removeEventListener('scroll', onChangeNavBar);
+    const onScroll = () => {
+      setIsScrolled(window.scrollY >= 50);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Entry animations
+  useEffect(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.fromTo(
+      logoRef.current,
+      { opacity: 0, x: -30 },
+      { opacity: 1, x: 0, duration: 0.6 }
+    )
+      .fromTo(
+        linksRef.current,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
+        '-=0.3'
+      )
+      .fromTo(
+        ctaRef.current,
+        { opacity: 0, x: 30 },
+        { opacity: 1, x: 0, duration: 0.6 },
+        '-=0.4'
+      );
   }, []);
 
   return (
     <>
-      <div className="h-[90px]"></div>
-      <div className={`z-10 transition-all navbar transparent fixed h-[90px] ${changeNavBar && 'bg-base-100 shadow-2xl h-[100px]'}`}>
-        <div className="navbar-start ml-4">
-          {/* Mobile Menu */}
-          <div className="dropdown">
-            <label className="btn btn-ghost lg:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-            </label>
-            {isMobileMenuOpen && (
-              <>
-                {/* Overlay to close mobile menu dropdown when it's opened*/}
-                <div className="absolute -top-5 -left-5 w-screen h-screen cursor-pointer" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}></div>
-                <ul className="absolute menu menu-compact -left-2  p-2 shadow-2xl shadow-black bg-base-100 rounded-box w-52">
-                  {routes.map((route) => (
-                    <Link href={route.path} key={route.path}>
-                      <li key={`${route.path}-mobile`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                        <p>{route.name}</p>
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
-
-          {/* Code Logo */}
-          {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-          <div className="lg:block hidden text-primary text-7xl p-0 m-0">
-            <div className="relative w-16 h-16">
-              <Image src="/logo.svg" fill alt="josegabjimenez.dev Logo" />
+      <nav
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled ? 'glass-navbar py-4' : 'py-6'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <div ref={logoRef} className="flex items-center gap-3 cursor-pointer group">
+              <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+                <Image src="/logo.svg" fill alt="Jose Gabriel Logo" className="object-contain" />
+              </div>
+              <span className="font-semibold text-lg hidden sm:block">
+                Jose<span className="text-primary">Gabriel</span>
+              </span>
             </div>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          {/* Desktop menu */}
-          <ul className="menu menu-horizontal p-0">
-            {routes.map((route) => (
-              <Link href={route.path} key={`${route.path}-desktop`}>
-                <li key={route.path} className="rounded-lg">
-                  <p>{route.name}</p>
-                </li>
-              </Link>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden lg:flex items-center gap-8">
+            {routes.map((route, index) => (
+              <li key={route.path}>
+                <Link href={route.path}>
+                  <span
+                    ref={(el) => (linksRef.current[index] = el)}
+                    className="nav-link text-sm font-medium text-white/80 hover:text-white cursor-pointer"
+                  >
+                    {route.name}
+                  </span>
+                </Link>
+              </li>
             ))}
           </ul>
+
+          {/* CTA Button */}
+          <div ref={ctaRef} className="hidden lg:block">
+            <a
+              href="/CV.pdf"
+              target="_blank"
+              download="CV.pdf"
+              className="glass-button flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium hover:text-primary transition-colors"
+            >
+              <RiDownloadCloudLine className="w-4 h-4" />
+              Download CV
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 glass-button rounded-xl"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <RiCloseLine className="w-6 h-6" />
+            ) : (
+              <RiMenuLine className="w-6 h-6" />
+            )}
+          </button>
         </div>
-        <div className="navbar-end mr-4">
-          {/* Contact button */}
-          <a href="/CV.pdf" target="_blank" download="CV.pdf" className="btn btn-outline btn-secondary rounded-full">
-            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg> */}
-            <RiDownloadCloudLine className="h-5 w-5 mr-1" />
-            Download CV
-          </a>
+
+        {/* Mobile Menu */}
+        <div
+          className={`lg:hidden absolute top-full left-0 right-0 glass-navbar transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="px-6 py-4 space-y-4">
+            {routes.map((route) => (
+              <Link href={route.path} key={route.path}>
+                <p
+                  className="block py-2 text-white/80 hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {route.name}
+                </p>
+              </Link>
+            ))}
+            <a
+              href="/CV.pdf"
+              target="_blank"
+              download="CV.pdf"
+              className="glass-button flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium w-full"
+            >
+              <RiDownloadCloudLine className="w-4 h-4" />
+              Download CV
+            </a>
+          </div>
         </div>
-      </div>
+      </nav>
+
+      {/* Spacer */}
+      <div className="h-24" />
     </>
   );
 };

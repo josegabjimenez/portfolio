@@ -1,18 +1,17 @@
 import React from 'react';
-// import Image from 'next/image';
 
 const Hero = ({ data }) => {
   return (
-    <section className="hero overflow-hidden absolute top-0 -z-[1] h-1/2">
-      {/* style={{ backgroundImage: `url(${project.images[0]})` }} */}
-      {/* <div className="w-full absolute -z-[1] blur-sm">
-        <Image width="100%" height="100%" layout="fill" src={data.images[0]} alt="Project Background Image" />
-      </div> */}
-      <img className="w-full absolute -z-[1] blur-sm" src={data.images[0]} alt="Project Background" />
-      <div className="hero-overlay bg-opacity-80 " />
-      <div className="hero-content text-center">
+    <section className="hero overflow-hidden absolute top-0 left-0 right-0 z-0 h-1/2 w-full">
+      <img 
+        className="w-full h-full object-cover absolute inset-0 blur-sm" 
+        src={data.images[0]} 
+        alt="Project Background" 
+      />
+      <div className="hero-overlay bg-black/70 absolute inset-0" />
+      <div className="hero-content text-center relative z-10">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-black italic">{data.title}</h1>
+          <h1 className="mb-5 text-5xl font-black italic text-white">{data.title}</h1>
         </div>
       </div>
     </section>
