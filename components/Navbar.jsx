@@ -59,7 +59,7 @@ const Navbar = () => {
             <Link href="/">
               <div ref={logoRef} className="flex items-center cursor-pointer group">
                 <span className="font-semibold text-lg text-white group-hover:text-white/90 transition-colors">
-                  Jose<span className="text-primary">Gabriel</span>
+                  josegab<span className="text-primary">jimenez</span>
                 </span>
               </div>
             </Link>

@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 :root {
   --primary: #bb000e;
@@ -131,6 +132,11 @@ a {
     background-clip: text;
   }
 
+  .text-glow {
+    color: var(--primary-light);
+    text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 40px rgba(187, 0, 14, 0.25), 0 0 80px rgba(187, 0, 14, 0.15);
+  }
+
   .glow-orb {
     position: absolute;
     border-radius: 50%;
@@ -150,7 +156,11 @@ a {
 
 /* Font Classes */
 .font-display {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant', serif;
+}
+
+.font-headline {
+  font-family: 'Syne', sans-serif;
 }
 
 .font-sans {
@@ -160,16 +170,17 @@ a {
 /* Hero Text Styles */
 .hero-title {
   font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
-.hero-title-italic {
-  font-family: 'Playfair Display', serif;
+.hero-title-accent {
+  font-family: 'Cormorant', serif;
   font-style: italic;
   font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 /* Animation Keyframes */
@@ -207,6 +218,17 @@ a {
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -248,25 +270,11 @@ a {
   position: absolute;
   inset: 0;
   background-image:
-    /* Fine grid - small squares */
-    linear-gradient(rgba(187, 0, 14, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(187, 0, 14, 0.03) 1px, transparent 1px),
-    /* Medium grid */
-    linear-gradient(rgba(187, 0, 14, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(187, 0, 14, 0.05) 1px, transparent 1px),
-    /* Large grid - main blueprint lines */
-    linear-gradient(rgba(187, 0, 14, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(187, 0, 14, 0.08) 1px, transparent 1px);
+    /* Fine grid - small squares */ linear-gradient(rgba(187, 0, 14, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(187, 0, 14, 0.03) 1px, transparent 1px),
+    /* Medium grid */ linear-gradient(rgba(187, 0, 14, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(187, 0, 14, 0.05) 1px, transparent 1px),
+    /* Large grid - main blueprint lines */ linear-gradient(rgba(187, 0, 14, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(187, 0, 14, 0.08) 1px, transparent 1px);
   background-size:
-    /* Fine grid */
-    20px 20px,
-    20px 20px,
-    /* Medium grid */
-    80px 80px,
-    80px 80px,
-    /* Large grid */
-    160px 160px,
-    160px 160px;
+    /* Fine grid */ 20px 20px, 20px 20px, /* Medium grid */ 80px 80px, 80px 80px, /* Large grid */ 160px 160px, 160px 160px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
   animation: gridPulse 8s ease-in-out infinite;
@@ -277,8 +285,7 @@ a {
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at center, rgba(187, 0, 14, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle at center, rgba(187, 0, 14, 0.15) 1px, transparent 1px);
   background-size: 160px 160px;
   mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 10%, transparent 60%);
   -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 10%, transparent 60%);
@@ -301,17 +308,13 @@ a {
   left: 0;
   right: 0;
   height: 200px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(187, 0, 14, 0.02) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(180deg, transparent 0%, rgba(187, 0, 14, 0.02) 50%, transparent 100%);
   animation: scanLine 12s linear infinite;
 }
 
 @keyframes gridPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
   }
   50% {
@@ -346,8 +349,7 @@ a {
   right: -50%;
   bottom: 0;
   height: 60vh;
-  background-image:
-    linear-gradient(transparent 0%, transparent 49%, rgba(187, 0, 14, 0.06) 50%, transparent 51%, transparent 100%),
+  background-image: linear-gradient(transparent 0%, transparent 49%, rgba(187, 0, 14, 0.06) 50%, transparent 51%, transparent 100%),
     linear-gradient(90deg, transparent 0%, transparent 49%, rgba(187, 0, 14, 0.04) 50%, transparent 51%, transparent 100%);
   background-size: 100% 60px, 120px 100%;
   transform: rotateX(60deg);
@@ -395,12 +397,7 @@ a {
 
 /* Navbar Pill Styles */
 .navbar-pill {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 30, 30, 0.9) 0%,
-    rgba(20, 20, 20, 0.95) 50%,
-    rgba(25, 25, 25, 0.9) 100%
-  );
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.95) 50%, rgba(25, 25, 25, 0.9) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -409,12 +406,7 @@ a {
 }
 
 .navbar-pill-scrolled {
-  background: linear-gradient(
-    135deg,
-    rgba(25, 25, 25, 0.95) 0%,
-    rgba(15, 15, 15, 0.98) 50%,
-    rgba(20, 20, 20, 0.95) 100%
-  );
+  background: linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(15, 15, 15, 0.98) 50%, rgba(20, 20, 20, 0.95) 100%);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -457,11 +449,7 @@ a {
 
 /* Mobile Menu Container */
 .mobile-menu-container {
-  background: linear-gradient(
-    180deg,
-    rgba(25, 25, 25, 0.98) 0%,
-    rgba(15, 15, 15, 0.98) 100%
-  );
+  background: linear-gradient(180deg, rgba(25, 25, 25, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid rgba(255, 255, 255, 0.08);

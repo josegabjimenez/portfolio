@@ -45,7 +45,7 @@ const Project = ({ project }) => {
   }, [recalcMaxSlideHeight]);
   // console.log(project);
   return (
-    <main className="flex flex-col justify-center items-center">
+    <main className="flex flex-col justify-center items-center w-full">
       <Head>
         <title>{project.title}</title>
         <meta name="description" content={`${project.title} project page`} />

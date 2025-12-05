@@ -20,7 +20,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Outfit', 'sans-serif'],
-        display: ['Playfair Display', 'serif'],
+        display: ['Cormorant', 'serif'],
+        headline: ['Syne', 'sans-serif'],
       },
       animation: {
         float: 'float 8s ease-in-out infinite',
