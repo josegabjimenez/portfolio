@@ -1,56 +1,131 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
-import avatar from '@assets/images/Avatar.png';
-
-// Animations
+import Link from 'next/link';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { RiArrowRightLine, RiDownloadLine } from 'react-icons/ri';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const roles = ['Full-Stack Developer', 'Frontend Developer', 'Web Developer', 'React Developer', 'Systems Engineer'];
 
 export default function Home() {
-  const titleRef = useRef();
-  const subtitleRef = useRef();
-  const iconBgRef = useRef();
-  const iconFaceRef = useRef();
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const roleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const ctaRef = useRef(null);
 
-  // Intro animation
+  const [displayedRole, setDisplayedRole] = useState('');
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Typewriter effect
   useEffect(() => {
-    gsap
-      .timeline()
-      .fromTo(titleRef.current, { y: 100, opacity: 0, duration: 0.5 }, { y: 0, opacity: 1, duration: 0.5 })
-      .fromTo(subtitleRef.current, { y: 100, opacity: 0, duration: 0.5 }, { y: 0, opacity: 1, duration: 0.5 }, 0.1)
-      .fromTo(iconBgRef.current, { y: 100, opacity: 0, duration: 0.3 }, { y: 0, opacity: 1, duration: 0.3 }, 0.1)
-      .fromTo(iconFaceRef.current, { opacity: 0, duration: 0.5 }, { opacity: 1, duration: 0.5 }, 0.05);
+    const currentRole = roles[roleIndex];
+    const typeSpeed = isDeleting ? 50 : 100;
+    const pauseTime = isDeleting ? 50 : 2000;
+
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          // Typing
+          if (displayedRole.length < currentRole.length) {
+            setDisplayedRole(currentRole.slice(0, displayedRole.length + 1));
+          } else {
+            // Finished typing, pause then start deleting
+            setTimeout(() => setIsDeleting(true), pauseTime);
+          }
+        } else {
+          // Deleting
+          if (displayedRole.length > 0) {
+            setDisplayedRole(displayedRole.slice(0, -1));
+          } else {
+            // Finished deleting, move to next role
+            setIsDeleting(false);
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+          }
+        }
+      },
+      displayedRole.length === currentRole.length && !isDeleting ? pauseTime : typeSpeed
+    );
+
+    return () => clearTimeout(timeout);
+  }, [displayedRole, roleIndex, isDeleting]);
+
+  // Hero animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(titleRef.current, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 1 })
+        .fromTo(roleRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
+        .fromTo(descriptionRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+        .fromTo(ctaRef.current?.children || [], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, '-=0.2');
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className={styles.container}>
+    <>
       <Head>
-        <title>Hi, I&apos;m Jose 🧑🏽</title>
-        <meta name="description" content="Welcome to my website! I'm Jose Gabriel Jiménez Vidales, also known as @josegabjimenez or @josegab.dev" />
+        <title>Jose Gabriel Jiménez | Full-Stack Developer</title>
+        <meta name="description" content="Full-Stack Developer building scalable web experiences that deliver real business impact." />
         <link rel="icon" href="/coding.png" />
       </Head>
 
-      <article className="intro flex flex-col justify-center items-center mt-12 mb-12">
-        <h1 ref={titleRef} className="text-2xl text-center">
-          Hi, I&apos;m <span className="text-primary font-bold underline cursor-pointer">Jose Gabriel Jiménez</span>
-        </h1>
-        <h2 ref={subtitleRef} className="text-4xl font-bold text-center">
-          Full-Stack Developer
-        </h2>
-        <div ref={iconBgRef} className="bg-red-500 w-32 h-28 rounded-full relative mt-12">
-          <div ref={iconFaceRef} className="absolute -bottom-2">
-            <Image src={avatar} width={200} height={200} alt="Jose Gabriel's Cartoon Picture" />
+      {/* Hero Section */}
+      <section ref={heroRef} className="relative z-10 min-h-[calc(100vh-10rem)] flex items-center justify-center px-6 py-12">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Intro Badge */}
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 text-sm text-white/70">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            Available for new opportunities
+          </div>
+
+          {/* Main Title */}
+          <h1 ref={titleRef} className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 tracking-tight">
+            Hi, I&apos;m <span className="hero-title-accent text-glow">Jose Gabriel Jiménez</span>
+          </h1>
+
+          {/* Typewriter Role */}
+          <div ref={roleRef} className="mb-12">
+            <span className="font-mono text-lg sm:text-xl md:text-2xl text-white/70 tracking-wide inline-flex items-center">
+              <span className="text-primary/50 mr-3 opacity-70">~/</span>
+              <span className="text-white/90">{displayedRole}</span>
+              <span className="w-[2px] h-[1.2em] bg-primary/80 ml-1 self-center" style={{ animation: 'blink 0.8s step-end infinite' }} />
+            </span>
+          </div>
+
+          {/* Description */}
+          <p ref={descriptionRef} className="text-white/60 text-lg md:text-xl max-w-xl mx-auto mb-12 leading-relaxed">
+            Full-Stack Developer with a frontend focus. I craft user-centric applications that deliver real business impact.
+          </p>
+
+          {/* CTA Buttons */}
+          <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/portfolio">
+              <button className="primary-button px-8 py-4 rounded-full font-semibold flex items-center gap-2 group">
+                View My Work
+                <RiArrowRightLine className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </button>
+            </Link>
+            <a href="/CV.pdf" target="_blank" rel="noopener noreferrer">
+              <button className="glass-button px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:text-primary transition-colors">
+                <RiDownloadLine className="w-5 h-5" />
+                Download CV
+              </button>
+            </a>
+            <Link href="/contact">
+              <button className="glass-button px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:text-primary transition-colors">
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                Let&apos;s Talk
+              </button>
+            </Link>
           </div>
         </div>
-      </article>
-      {/* <style jsx>{`
-        h1 {
-          text-align: center;
-          color: #f2a;
-          margin-top: 40px;
-        }
-      `}</style> */}
-    </section>
+      </section>
+    </>
   );
 }
