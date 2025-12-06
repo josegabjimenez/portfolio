@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { useTheme } from '@hooks/useTheme';
 import { RiSunLine, RiMoonLine } from 'react-icons/ri';
 
-const ThemeToggle = forwardRef(({ className = '' }, ref) => {
+const ThemeToggle = forwardRef(({ className = '', animated = true }, ref) => {
   const { theme, toggleTheme, mounted } = useTheme();
   const isDark = theme === 'dark';
 
@@ -11,7 +11,7 @@ const ThemeToggle = forwardRef(({ className = '' }, ref) => {
     return (
       <div
         ref={ref}
-        className={`theme-toggle w-9 h-9 rounded-full ${className}`}
+        className={`theme-toggle w-9 h-9 rounded-full opacity-0 ${className}`}
         aria-hidden="true"
       />
     );
@@ -21,7 +21,7 @@ const ThemeToggle = forwardRef(({ className = '' }, ref) => {
     <button
       ref={ref}
       onClick={toggleTheme}
-      className={`theme-toggle group relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${className}`}
+      className={`theme-toggle group relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${animated ? 'opacity-0' : ''} ${className}`}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >

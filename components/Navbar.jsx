@@ -12,6 +12,7 @@ const Navbar = () => {
   const logoRef = useRef(null);
   const linksRef = useRef([]);
   const themeToggleRef = useRef(null);
+  const mobileThemeToggleRef = useRef(null);
   const ctaRef = useRef(null);
 
   const routes = [
@@ -49,6 +50,7 @@ const Navbar = () => {
       .fromTo(logoRef.current, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.4')
       .fromTo(linksRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, '-=0.3')
       .fromTo(themeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.2')
+      .fromTo(mobileThemeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.4')
       .fromTo(ctaRef.current, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.3');
   }, []);
 
@@ -98,7 +100,7 @@ const Navbar = () => {
 
             {/* Mobile: Theme Toggle + Menu Button */}
             <div className="md:hidden flex items-center gap-2">
-              <ThemeToggle />
+              <ThemeToggle ref={mobileThemeToggleRef} />
               <button className="p-2 mobile-menu-btn transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
                 {isMobileMenuOpen ? <RiCloseLine className="w-6 h-6" /> : <RiMenuLine className="w-6 h-6" />}
               </button>
