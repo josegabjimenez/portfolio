@@ -677,3 +677,59 @@ a {
 [data-theme="light"] .group:hover .navbar-logo {
   color: var(--text-secondary);
 }
+
+/* Light mode text color overrides */
+[data-theme="light"] .text-white {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .text-white\/90 {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .text-white\/80 {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .text-white\/70 {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .text-white\/60 {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .text-white\/50 {
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .text-white\/40 {
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .text-white\/30 {
+  color: var(--text-muted);
+}
+
+/* Light mode border color overrides */
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Light mode hover states */
+[data-theme="light"] .hover\:text-white:hover {
+  color: var(--text-primary);
+}
+
+/* Light mode background overlays */
+[data-theme="light"] .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
