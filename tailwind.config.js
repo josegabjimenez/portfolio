@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './*.{js,ts,jsx,tsx}'],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -59,13 +60,25 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        dracula: {
+        dark: {
           ...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
           primary: '#BB000E',
           'primary-focus': '#E31C25',
           'base-100': '#0a0a0a',
           'base-200': '#121212',
           'base-300': '#1a1a1a',
+          'base-content': '#ffffff',
+        },
+      },
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          primary: '#BB000E',
+          'primary-focus': '#E31C25',
+          'base-100': '#f8f9fa',
+          'base-200': '#ffffff',
+          'base-300': '#e9ecef',
+          'base-content': '#1a1a2e',
         },
       },
     ],

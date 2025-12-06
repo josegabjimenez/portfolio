@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { RiDownloadCloudLine, RiMenuLine, RiCloseLine } from 'react-icons/ri';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,6 +11,7 @@ const Navbar = () => {
   const pillRef = useRef(null);
   const logoRef = useRef(null);
   const linksRef = useRef([]);
+  const themeToggleRef = useRef(null);
   const ctaRef = useRef(null);
 
   const routes = [
@@ -46,6 +48,7 @@ const Navbar = () => {
     tl.fromTo(pillRef.current, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.8 })
       .fromTo(logoRef.current, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.4')
       .fromTo(linksRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, '-=0.3')
+      .fromTo(themeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.2')
       .fromTo(ctaRef.current, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.3');
   }, []);
 
@@ -58,7 +61,7 @@ const Navbar = () => {
             {/* Logo */}
             <Link href="/">
               <div ref={logoRef} className="flex items-center cursor-pointer group">
-                <span className="font-semibold text-lg text-white group-hover:text-white/90 transition-colors">
+                <span className="font-semibold text-lg navbar-logo transition-colors">
                   josegab<span className="text-primary">jimenez</span>
                 </span>
               </div>
@@ -77,20 +80,29 @@ const Navbar = () => {
               ))}
             </ul>
 
-            {/* CTA Button - Desktop */}
-            <div ref={ctaRef} className="hidden md:block">
-              <a href="/CV.pdf" target="_blank" download="CV.pdf">
-                <button className="navbar-cta-button px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2">
-                  <RiDownloadCloudLine className="w-4 h-4" />
-                  Download CV
-                </button>
-              </a>
+            {/* Right side actions */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Theme Toggle */}
+              <ThemeToggle ref={themeToggleRef} />
+
+              {/* CTA Button */}
+              <div ref={ctaRef}>
+                <a href="/CV.pdf" target="_blank" download="CV.pdf">
+                  <button className="navbar-cta-button px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                    <RiDownloadCloudLine className="w-4 h-4" />
+                    Download CV
+                  </button>
+                </a>
+              </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button className="md:hidden p-2 text-white/70 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
-              {isMobileMenuOpen ? <RiCloseLine className="w-6 h-6" /> : <RiMenuLine className="w-6 h-6" />}
-            </button>
+            {/* Mobile: Theme Toggle + Menu Button */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button className="p-2 mobile-menu-btn transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
+                {isMobileMenuOpen ? <RiCloseLine className="w-6 h-6" /> : <RiMenuLine className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -100,12 +112,12 @@ const Navbar = () => {
             <div className="px-6 py-6 space-y-2">
               {routes.map((route) => (
                 <Link href={route.path} key={route.path}>
-                  <p className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>
+                  <p className="block py-3 px-4 mobile-menu-link rounded-xl transition-all duration-300 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>
                     {route.name}
                   </p>
                 </Link>
               ))}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 mobile-menu-divider">
                 <a href="/CV.pdf" target="_blank" download="CV.pdf">
                   <button
                     className="navbar-cta-button w-full py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2"

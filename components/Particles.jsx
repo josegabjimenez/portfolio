@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import { useTheme } from '@hooks/useTheme';
 
 const ParticlesBackground = () => {
   const [init, setInit] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -40,13 +43,15 @@ const ParticlesBackground = () => {
       },
       particles: {
         color: {
-          value: ['#ffffff', '#BB000E', '#E31C25'],
+          value: isDark
+            ? ['#ffffff', '#BB000E', '#E31C25']
+            : ['#1a1a2e', '#BB000E', '#E31C25'],
         },
         links: {
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#1a1a2e',
           distance: 150,
           enable: true,
-          opacity: 0.05,
+          opacity: isDark ? 0.05 : 0.08,
           width: 1,
         },
         move: {
@@ -67,7 +72,7 @@ const ParticlesBackground = () => {
           value: 40,
         },
         opacity: {
-          value: { min: 0.1, max: 0.4 },
+          value: isDark ? { min: 0.1, max: 0.4 } : { min: 0.15, max: 0.5 },
           animation: {
             enable: true,
             speed: 0.5,
@@ -83,11 +88,11 @@ const ParticlesBackground = () => {
       },
       detectRetina: true,
     }),
-    []
+    [isDark]
   );
 
   if (init) {
-    return <Particles id="tsparticles" options={options} />;
+    return <Particles id="tsparticles" key={theme} options={options} />;
   }
 
   return null;
