@@ -44,14 +44,19 @@ const Navbar = () => {
 
   // Entry animations
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // Small delay to ensure all components are mounted
+    const timer = setTimeout(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.fromTo(pillRef.current, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.8 })
-      .fromTo(logoRef.current, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.4')
-      .fromTo(linksRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, '-=0.3')
-      .fromTo(themeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.2')
-      .fromTo(mobileThemeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.4')
-      .fromTo(ctaRef.current, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.3');
+      tl.fromTo(pillRef.current, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.8 })
+        .fromTo(logoRef.current, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.4')
+        .fromTo(linksRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, '-=0.3')
+        .fromTo(themeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.2')
+        .fromTo(mobileThemeToggleRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.4')
+        .fromTo(ctaRef.current, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, '-=0.3');
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
