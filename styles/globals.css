@@ -822,6 +822,23 @@ a {
   box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary-glow);
 }
 
+/* Mobile timeline adjustments */
+@media (max-width: 767px) {
+  .timeline-line {
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .timeline-dot {
+    left: 0 !important;
+    transform: translateX(-50%);
+  }
+
+  .timeline-item:hover .timeline-dot {
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
 /* Skill category card hover glow */
 .skill-category:hover {
   box-shadow: 0 0 30px rgba(187, 0, 14, 0.1), 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -912,12 +929,21 @@ a {
   border: 1px solid rgba(187, 0, 14, 0.4);
   color: #ff4d5a;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 [data-theme='light'] .timeline-period-badge {
   background: linear-gradient(135deg, rgba(187, 0, 14, 0.12) 0%, rgba(187, 0, 14, 0.08) 100%);
   border: 1px solid rgba(187, 0, 14, 0.3);
   color: var(--primary);
+}
+
+/* Mobile period badge */
+@media (max-width: 639px) {
+  .timeline-period-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
 }
 
 /* Work Experience - Technology Tags (improved contrast) */

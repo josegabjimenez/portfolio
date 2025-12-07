@@ -272,10 +272,10 @@ const About = ({ skills }) => {
                   <span className="stats-pill-label text-sm">Projects</span>
                   <p className="stats-pill-value">20+</p>
                 </div>
-                <div className="stats-pill px-4 py-2 rounded-xl">
+                {/* <div className="stats-pill px-4 py-2 rounded-xl">
                   <span className="stats-pill-label text-sm">Clients</span>
                   <p className="stats-pill-value">10+</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -330,27 +330,28 @@ const About = ({ skills }) => {
             <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent timeline-line" />
 
             {workExperience.map((job, index) => (
-              <div key={job.id} className={`timeline-item relative flex flex-col md:flex-row gap-8 mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+              <div key={job.id} className={`timeline-item relative flex flex-col md:flex-row gap-4 md:gap-8 mb-8 md:mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                 {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50 timeline-dot z-10" />
+                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-primary shadow-lg shadow-primary/50 timeline-dot z-10" />
 
                 {/* Content card */}
-                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} pl-8 md:pl-0`}>
-                  <div className="glass-card p-6 about-card hover:border-primary/30 transition-all duration-300 group">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{job.role}</h3>
-                        <p className="text-white/60 flex items-center gap-2">
-                          <FaBriefcase className="text-primary/60" />
+                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} pl-6 md:pl-0`}>
+                  <div className="glass-card p-4 sm:p-6 about-card hover:border-primary/30 transition-all duration-300 group">
+                    {/* Mobile: Stack vertically, Desktop: Side by side */}
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
+                      <div className="order-2 sm:order-1">
+                        <h3 className="text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">{job.role}</h3>
+                        <p className="text-white/60 flex items-center gap-2 text-sm sm:text-base">
+                          <FaBriefcase className="text-primary/60 flex-shrink-0" />
                           {job.company}
                         </p>
                       </div>
-                      <span className="timeline-period-badge px-3 py-1 rounded-full text-sm">{job.period}</span>
+                      <span className="timeline-period-badge px-3 py-1 rounded-full text-xs sm:text-sm order-1 sm:order-2 self-start whitespace-nowrap">{job.period}</span>
                     </div>
-                    <p className="text-white/70 mb-4 leading-relaxed">{job.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <p className="text-white/70 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">{job.description}</p>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {job.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="tech-tag px-3 py-1 rounded-full text-xs">
+                        <span key={techIndex} className="tech-tag px-2 sm:px-3 py-1 rounded-full text-xs">
                           {tech}
                         </span>
                       ))}
