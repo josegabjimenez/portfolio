@@ -65,17 +65,19 @@ const Navbar = () => {
         {/* Pill Container */}
         <div ref={pillRef} className={`navbar-pill max-w-4xl mx-auto transition-all duration-500 ${isScrolled ? 'navbar-pill-scrolled' : ''}`}>
           <div className="flex items-center justify-between px-4 sm:px-6 py-3">
-            {/* Logo */}
-            <Link href="/">
-              <div ref={logoRef} className="flex items-center cursor-pointer group">
-                <span className="font-semibold text-lg navbar-logo transition-colors">
-                  josegab<span className="text-primary">jimenez</span>
-                </span>
-              </div>
-            </Link>
+            {/* Logo - flex-1 to balance with right side */}
+            <div className="flex-1">
+              <Link href="/">
+                <div ref={logoRef} className="flex items-center cursor-pointer group w-fit">
+                  <span className="font-semibold text-lg navbar-logo transition-colors">
+                    josegab<span className="text-primary">jimenez</span>
+                  </span>
+                </div>
+              </Link>
+            </div>
 
-            {/* Desktop Navigation */}
-            <ul className="hidden md:flex items-center gap-6 lg:gap-8">
+            {/* Desktop Navigation - centered */}
+            <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-8">
               {routes.map((route, index) => (
                 <li key={route.path}>
                   <Link href={route.path}>
@@ -87,8 +89,8 @@ const Navbar = () => {
               ))}
             </ul>
 
-            {/* Right side actions */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Right side actions - flex-1 to balance with logo */}
+            <div className="hidden md:flex flex-1 items-center justify-end gap-3">
               {/* Theme Toggle */}
               <ThemeToggle ref={themeToggleRef} />
 
