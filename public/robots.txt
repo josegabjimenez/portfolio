@@ -1,0 +1,16 @@
+# robots.txt for josegabjimenez.dev
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /admin/
+Disallow: /api/
+
+# Allow all other pages
+Allow: /about
+Allow: /contact
+Allow: /portfolio
+
+# Sitemap location
+Sitemap: https://josegabjimenez.dev/sitemap.xml

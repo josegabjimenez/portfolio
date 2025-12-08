@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { RiArrowRightLine, RiDownloadLine } from 'react-icons/ri';
+import { SEO } from '@components/index';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,11 +69,40 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Jose Gabriel Jiménez | Full-Stack Developer</title>
-        <meta name="description" content="Full-Stack Developer building scalable web experiences that deliver real business impact." />
-        <link rel="icon" href="/coding.png" />
-      </Head>
+      <SEO
+        title="Jose Gabriel Jiménez | Full-Stack Developer"
+        description="Experienced Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications that deliver exceptional user experiences and business impact."
+        keywords="Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Backend Developer, Next.js Developer, Node.js, JavaScript, TypeScript, React Native, Portfolio, josegabjimenez, josegabjimenez.dev, Systems Engineer"
+        url="https://josegabjimenez.dev"
+        type="website"
+      />
+
+      {/* Structured Data (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Jose Gabriel Jiménez',
+            alternateName: 'Jose Gabriel Jimenez Vidales',
+            url: 'https://josegabjimenez.dev',
+            image: 'https://josegabjimenez.dev/og-image.png',
+            jobTitle: 'Full-Stack Developer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Team International',
+            },
+            description: 'Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications.',
+            knowsAbout: ['React', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript', 'React Native', 'HTML', 'CSS', 'Tailwind CSS', 'Web Development', 'Mobile Development', 'Full-Stack Development'],
+            sameAs: ['https://github.com/josegabjimenez', 'https://linkedin.com/in/josegabjimenez', 'https://twitter.com/josegabjimenez'],
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'MX',
+            },
+          }),
+        }}
+      />
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative z-10 min-h-[calc(100vh-10rem)] flex items-center justify-center px-6 py-12">

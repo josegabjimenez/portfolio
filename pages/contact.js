@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Head from 'next/head';
 import emailjs from '@emailjs/browser';
+import { SEO } from '@components/index';
 
 // Animations
 import { gsap } from 'gsap';
@@ -65,10 +65,13 @@ const Contact = () => {
 
   return (
     <section ref={sectionRef} className="sm:flex-row flex-col flex justify-center items-center gap-12 px-2 my-12">
-      <Head>
-        <title>Contact me 📲</title>
-        <meta name="description" content="Page to contact me @josegabjimenez" />
-      </Head>
+      <SEO
+        title="Contact Jose Gabriel Jiménez"
+        description="Get in touch with Jose Gabriel Jiménez for web development projects, collaborations, or job opportunities. Reach out via email to discuss your next React, Next.js, or full-stack development project. Available for freelance and full-time opportunities."
+        keywords="Contact Jose Gabriel Jimenez, Hire Full-Stack Developer, Web Developer Contact, React Developer for Hire, Next.js Expert Contact, josegabjimenez contact, josegabjimenez.dev contact, Email Jose Gabriel, Web Development Services"
+        url="https://josegabjimenez.dev/contact"
+        type="website"
+      />
       <article className="sm:text-left text-center ">
         <h1 className="sm:text-7xl text-5xl font-extrabold">Send me an email ✉</h1>
         <form ref={form} onSubmit={handleSubmit} className="form-control w-full">

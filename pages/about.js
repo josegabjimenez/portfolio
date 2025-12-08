@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import Head from 'next/head';
 import ProfilePicture from '@assets/images/Photo.jpg';
+import { SEO } from '@components/index';
 
 // Animations
 import { gsap } from 'gsap';
@@ -226,10 +226,13 @@ const About = ({ skills }) => {
   return (
     <section ref={sectionRef} className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       {/* Metadata */}
-      <Head>
-        <title>About me ☕</title>
-        <meta name="description" content="About me page, this page includes information about @josegabjimenez, @josegab.dev, Jose Gabriel Jiménez Vidales" />
-      </Head>
+      <SEO
+        title="About Jose Gabriel Jiménez"
+        description="Learn about Jose Gabriel Jiménez, a passionate Full-Stack Developer with 3+ years of experience in web and mobile app development. Specializing in React, Next.js, Node.js, and React Native, with expertise in building scalable applications across frontend and backend technologies."
+        keywords="Jose Gabriel Jimenez, About Jose Gabriel, Full-Stack Developer Bio, React Expert, Next.js Developer, Node.js Developer, Web Developer Portfolio, Mobile Developer, Frontend Expert, Backend Developer, josegabjimenez bio, josegabjimenez.dev about"
+        url="https://josegabjimenez.dev/about"
+        type="profile"
+      />
 
       <div className="max-w-6xl mx-auto">
         {/* Hero Section - Profile + Bio */}
