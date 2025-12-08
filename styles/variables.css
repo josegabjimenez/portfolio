@@ -1,0 +1,27 @@
+/* ==========================================================================
+   CSS Custom Properties (Variables)
+   ========================================================================== */
+
+:root {
+  /* Primary Colors */
+  --primary: #bb000e;
+  --primary-light: #e31c25;
+  --primary-glow: rgba(187, 0, 14, 0.4);
+
+  /* Dark Theme (Default) */
+  --dark-bg: #0a0a0a;
+  --dark-surface: #121212;
+  --dark-card: rgba(20, 20, 20, 0.6);
+
+  /* Glass Effects */
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  /* Theme Transition */
+  --theme-transition: background-color 0.4s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

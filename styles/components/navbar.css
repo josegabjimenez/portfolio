@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Navbar Component Styles
+   Pill navbar, nav links, mobile menu, theme toggle, CTA button
+   ========================================================================== */
+
+/* ==========================================================================
+   Nav Link Styles
+   ========================================================================== */
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--primary-light);
+}
+
+/* ==========================================================================
+   Navbar Pill Styles
+   ========================================================================== */
+
+.navbar-pill {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.95) 50%, rgba(25, 25, 25, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.navbar-pill-scrolled {
+  background: linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(15, 15, 15, 0.98) 50%, rgba(20, 20, 20, 0.95) 100%);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-pill {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link-pill::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.nav-link-pill:hover::after {
+  width: 100%;
+}
+
+.nav-link-pill:hover {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Navbar CTA Button
+   ========================================================================== */
+
+.navbar-cta-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-cta-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Mobile Menu
+   ========================================================================== */
+
+.mobile-menu-container {
+  background: linear-gradient(180deg, rgba(25, 25, 25, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-menu-btn:hover {
+  color: #ffffff;
+}
+
+/* Mobile menu links */
+.mobile-menu-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mobile-menu-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile menu divider */
+.mobile-menu-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Navbar Logo
+   ========================================================================== */
+
+.navbar-logo {
+  color: #ffffff;
+}
+
+.group:hover .navbar-logo {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ==========================================================================
+   Theme Toggle Styles
+   ========================================================================== */
+
+.theme-toggle {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle-bg {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:hover .theme-toggle-bg {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.theme-toggle:active .theme-toggle-bg {
+  transform: scale(0.95);
+}
+
+.theme-toggle-glow {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+}
