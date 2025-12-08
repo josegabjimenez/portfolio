@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Utility Classes
+   Glassmorphism, Buttons, Text Effects, Glow Effects
+   ========================================================================== */
+
+/* ==========================================================================
+   Glassmorphism Utilities
+   ========================================================================== */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+.glass-navbar {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-button {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   Button Utilities
+   ========================================================================== */
+
+.primary-button {
+  background: var(--primary);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+  background: var(--primary-light);
+  box-shadow: 0 0 30px var(--primary-glow);
+}
+
+/* ==========================================================================
+   Text Utilities
+   ========================================================================== */
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-glow {
+  color: var(--primary-light);
+  text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 40px rgba(187, 0, 14, 0.25), 0 0 80px rgba(187, 0, 14, 0.15);
+}
+
+/* ==========================================================================
+   Glow Orb Utilities
+   ========================================================================== */
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.glow-primary {
+  background: var(--primary);
+}
+
+.glow-white {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   Font Classes
+   ========================================================================== */
+
+.font-display {
+  font-family: 'Cormorant', serif;
+}
+
+.font-headline {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-sans {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ==========================================================================
+   Hero Text Styles
+   ========================================================================== */
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.hero-title-accent {
+  font-family: 'Cormorant', serif;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   Primary Color Variations
+   ========================================================================== */
+
+/* Ring color for profile image */
+.ring-primary\/20 {
+  --tw-ring-color: rgba(187, 0, 14, 0.2);
+}
+
+/* Primary color shadows */
+.shadow-primary\/10 {
+  --tw-shadow-color: rgba(187, 0, 14, 0.1);
+}
+
+.shadow-primary\/50 {
+  --tw-shadow-color: rgba(187, 0, 14, 0.5);
+}
+
+/* Background primary variations */
+.bg-primary\/10 {
+  background-color: rgba(187, 0, 14, 0.1);
+}
+
+.bg-primary\/20 {
+  background-color: rgba(187, 0, 14, 0.2);
+}
+
+/* Border primary variations */
+.border-primary\/20 {
+  border-color: rgba(187, 0, 14, 0.2);
+}
+
+.border-primary\/30 {
+  border-color: rgba(187, 0, 14, 0.3);
+}
+
+.hover\:border-primary\/30:hover {
+  border-color: rgba(187, 0, 14, 0.3);
+}
+
+/* Text primary */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-primary\/60 {
+  color: rgba(187, 0, 14, 0.6);
+}
+
+.group-hover\:text-primary:hover {
+  color: var(--primary);
+}
+
+/* Ensure group hover works for text-primary */
+.group:hover .group-hover\:text-primary {
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   Service Card
+   ========================================================================== */
+
+.service-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   About Card
+   ========================================================================== */
+
+.about-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}

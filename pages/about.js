@@ -144,7 +144,7 @@ const workExperience = [
     id: 3,
     role: 'Software Developer',
     company: 'Kalila Pet',
-    period: 'Jan 2023 - Dec 2023',
+    period: 'Apr 2022 - Dec 2022',
     description:
       'Built the mobile booking application using React Native, enabling cross-platform access for clients. Contributed to the administrative dashboard and backend logic using Next.js and Node.js.',
     technologies: ['React Native', 'Next.js', 'Node.js'],

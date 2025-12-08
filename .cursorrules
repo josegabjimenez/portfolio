@@ -1,0 +1,353 @@
+# Portfolio Project - Cursor Rules
+
+## Project Overview
+
+This is a Next.js 15 portfolio website built with React 18, Tailwind CSS, and Firebase. The project follows a modular, scalable architecture with organized CSS structure and component-based design.
+
+## Technology Stack
+
+- **Framework**: Next.js 15.3.4 (Pages Router)
+- **React**: 18.2.0
+- **Styling**: Tailwind CSS 3.0.24 + Custom CSS Modules
+- **UI Library**: DaisyUI 2.15.0
+- **Animations**: GSAP 3.11.0
+- **Backend**: Firebase 11.9.1
+- **Icons**: react-icons 4.3.1
+- **Other**: @tsparticles/react, @splidejs/react-splide, @emailjs/browser
+
+## Project Structure
+
+```
+portfolio/
+├── assets/              # Static assets (images, SVGs)
+│   └── images/
+├── components/          # Reusable React components
+│   └── index.jsx        # Component exports (use barrel exports)
+├── firebase/            # Firebase configuration and utilities
+├── hooks/               # Custom React hooks
+├── pages/               # Next.js pages and API routes
+│   ├── _app.js         # App wrapper with Layout and ThemeProvider
+│   ├── _document.js    # Document customization
+│   ├── api/            # API routes
+│   └── [page].js       # Page components
+├── public/              # Public static files
+├── services/            # API services and endpoints
+├── styles/              # CSS files (modular structure)
+│   ├── globals.css     # Main entry point (imports all modules)
+│   ├── variables.css   # CSS custom properties
+│   ├── base.css        # Reset, html, body, scrollbar
+│   ├── utilities.css   # Reusable utility classes
+│   ├── animations.css  # Keyframes and animation classes
+│   ├── components/     # Component-specific styles
+│   │   ├── navbar.css
+│   │   ├── timeline.css
+│   │   ├── skills.css
+│   │   ├── blueprint.css
+│   │   └── hero.css
+│   └── themes/          # Theme-specific overrides
+│       └── light.css
+└── tailwind.config.js   # Tailwind configuration
+
+```
+
+## Path Aliases (jsconfig.json)
+
+Always use path aliases for imports:
+
+- `@components/*` → `components/*`
+- `@pages/*` → `pages/*`
+- `@styles/*` → `styles/*`
+- `@services/*` → `services/*`
+- `@assets/*` → `assets/*`
+- `@firebase/*` → `firebase/*`
+- `@hooks/*` → `hooks/*`
+
+**Example**: `import { Navbar } from '@components/index'` not `import Navbar from '../components/Navbar'`
+
+## CSS & Styling Guidelines
+
+### Modular CSS Architecture
+
+The project uses a **modular CSS structure** - NEVER add styles directly to `globals.css`. Instead:
+
+1. **CSS Variables** → `styles/variables.css`
+
+   - All CSS custom properties (`:root` variables)
+   - Theme tokens (colors, spacing, etc.)
+
+2. **Base Styles** → `styles/base.css`
+
+   - HTML/body reset
+   - Scrollbar styling
+   - Selection styling
+   - Link defaults
+   - Particle canvas styles
+
+3. **Utility Classes** → `styles/utilities.css`
+
+   - Glassmorphism utilities (`.glass`, `.glass-card`, `.glass-button`)
+   - Button utilities (`.primary-button`)
+   - Text utilities (`.text-gradient`, `.text-glow`)
+   - Font classes (`.font-display`, `.font-headline`)
+   - Glow orb utilities
+   - Primary color variations
+
+4. **Animations** → `styles/animations.css`
+
+   - All `@keyframes` definitions
+   - Animation classes (`.animate-float`, `.animate-pulse-glow`)
+
+5. **Component Styles** → `styles/components/[component-name].css`
+
+   - Component-specific styles only
+   - One file per major component
+   - Examples: `navbar.css`, `timeline.css`, `skills.css`, `blueprint.css`
+
+6. **Theme Overrides** → `styles/themes/light.css`
+   - All `[data-theme='light']` overrides
+   - Theme-specific adjustments
+
+### CSS Rules
+
+- **Always** add new component styles to `styles/components/[component-name].css`
+- **Always** add new utilities to `styles/utilities.css`
+- **Always** add new animations to `styles/animations.css`
+- **Always** add new theme overrides to `styles/themes/light.css`
+- **Never** add styles directly to `globals.css` (it only imports)
+- **Always** use CSS variables from `variables.css` for colors and theme tokens
+- **Always** support both dark and light themes when adding new styles
+
+### Tailwind CSS
+
+- Use Tailwind utility classes for layout, spacing, and common styles
+- Extend Tailwind in `tailwind.config.js` for project-specific utilities
+- Use `@layer utilities` in `tailwind.config.js` for custom Tailwind utilities
+- Prefer Tailwind classes over custom CSS when possible
+
+### Theme Support
+
+- **Always** provide light theme overrides for new styles
+- Use CSS variables for colors: `var(--primary)`, `var(--text-primary)`, etc.
+- Test both themes when adding new components
+
+## Component Guidelines
+
+### Component Structure
+
+```jsx
+import React from 'react';
+// Use path aliases for imports
+import { SomeComponent } from '@components/index';
+import '@styles/globals.css'; // Only in _app.js
+
+const MyComponent = () => {
+  // Component logic
+  return <div className="my-component">{/* JSX */}</div>;
+};
+
+export default MyComponent;
+```
+
+### Component Organization
+
+- **One component per file** (except index.jsx for barrel exports)
+- **Export components** from `components/index.jsx` for easy imports
+- **Use functional components** with hooks (no class components)
+- **Keep components focused** - single responsibility principle
+
+### Naming Conventions
+
+- **Components**: PascalCase (e.g., `Navbar.jsx`, `ThemeToggle.jsx`)
+- **Files**: Match component name exactly
+- **CSS classes**: kebab-case (e.g., `navbar-pill`, `timeline-dot`)
+- **Hooks**: camelCase starting with "use" (e.g., `useTheme.js`, `useWindowSize.js`)
+- **Services**: camelCase (e.g., `endPoints.js`)
+
+### Component Patterns
+
+- Use **React hooks** for state management (`useState`, `useEffect`, custom hooks)
+- Use **GSAP** for complex animations
+- Use **react-icons** for icons
+- Use **refs** for DOM manipulation and GSAP animations
+- Always include **accessibility attributes** (`aria-label`, `aria-hidden`)
+
+## Page Guidelines
+
+### Page Structure
+
+- Pages go in `pages/` directory
+- Use Next.js Pages Router conventions
+- API routes in `pages/api/`
+- Dynamic routes: `pages/[slug].js` or `pages/[category]/[slug].js`
+
+### Page Example
+
+```jsx
+import { Layout } from '@components/index';
+
+const MyPage = () => {
+  return (
+    <Layout>
+      <section className="my-page-section">{/* Page content */}</section>
+    </Layout>
+  );
+};
+
+export default MyPage;
+```
+
+## Hooks Guidelines
+
+### Custom Hooks
+
+- Create hooks in `hooks/` directory
+- Name hooks with "use" prefix (e.g., `useTheme.js`, `useWindowSize.js`)
+- Export hooks as default or named exports
+- Use hooks for reusable logic, state management, and side effects
+
+## Services Guidelines
+
+### API Services
+
+- Create service files in `services/` directory
+- Keep API endpoints and data fetching logic separate
+- Use Firebase hooks from `react-firebase-hooks` when appropriate
+
+## Firebase Guidelines
+
+### Firebase Structure
+
+- Firebase config in `firebase/index.js`
+- Use `react-firebase-hooks` for data fetching
+- Keep Firebase logic separate from components
+
+## Code Style
+
+### General Rules
+
+- Use **ES6+** syntax (arrow functions, destructuring, template literals)
+- Use **const** by default, **let** when reassignment needed
+- Use **functional components** only
+- Prefer **named exports** for utilities, **default exports** for components
+- Use **async/await** for asynchronous code
+- Always handle **error states** and **loading states**
+
+### Formatting
+
+- Follow **Prettier** configuration
+- Use **ESLint** rules from `eslint-config-next`
+- Use **2 spaces** for indentation
+- Use **single quotes** for strings (or as configured)
+- Use **semicolons** (or as configured)
+
+### Accessibility
+
+- Always include **alt text** for images
+- Use **semantic HTML** elements
+- Include **ARIA labels** where appropriate
+- Ensure **keyboard navigation** works
+- Test with **screen readers** when possible
+
+## Scalability Best Practices
+
+### When Adding New Features
+
+1. **New Component**
+
+   - Create component in `components/[ComponentName].jsx`
+   - Export from `components/index.jsx`
+   - Create corresponding CSS file: `styles/components/[component-name].css`
+   - Add light theme overrides in `styles/themes/light.css`
+   - Use path aliases for imports
+
+2. **New Page**
+
+   - Create page in `pages/[page-name].js`
+   - Wrap with `<Layout>` component
+   - Use existing utility classes when possible
+   - Add page-specific styles to appropriate CSS module
+
+3. **New Utility Class**
+
+   - Add to `styles/utilities.css`
+   - Use CSS variables for theming
+   - Add light theme override if needed
+
+4. **New Animation**
+
+   - Add keyframes to `styles/animations.css`
+   - Add animation class if reusable
+   - Use GSAP for complex animations
+
+5. **New Theme Variable**
+   - Add to `styles/variables.css`
+   - Update both `:root` and `[data-theme='light']` if needed
+
+### Code Organization
+
+- **Keep files focused** - one responsibility per file
+- **Extract reusable logic** into hooks or utilities
+- **Don't repeat code** - create reusable components/utilities
+- **Follow DRY principle** - Don't Repeat Yourself
+- **Keep components small** - if a component is >300 lines, consider splitting
+
+### Performance
+
+- Use **Next.js Image** component for images
+- **Lazy load** components when appropriate
+- **Optimize animations** - use CSS transforms when possible
+- **Code split** large dependencies
+
+## Common Patterns
+
+### Theme Toggle
+
+```jsx
+import { useTheme } from '@hooks/useTheme';
+// Theme is managed globally via ThemeProvider in _app.js
+```
+
+### GSAP Animations
+
+```jsx
+import { gsap } from 'gsap';
+import { useRef, useEffect } from 'react';
+
+const MyComponent = () => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+  }, []);
+
+  return <div ref={ref}>Content</div>;
+};
+```
+
+### Glassmorphism Effect
+
+Use utility classes: `.glass`, `.glass-card`, `.glass-button`, `.glass-navbar`
+
+### Primary Color Accents
+
+Use CSS variables: `var(--primary)`, `var(--primary-light)`, `var(--primary-glow)`
+
+## Important Notes
+
+- **Never modify `globals.css` directly** - it only imports other modules
+- **Always use path aliases** for imports
+- **Always support both themes** when adding styles
+- **Always export components** from `components/index.jsx`
+- **Keep CSS modular** - one file per concern
+- **Test in both themes** after adding new styles
+- **Follow existing patterns** - consistency is key
+
+## Questions to Ask Before Implementing
+
+1. Is this a new component? → Create in `components/` and add to `index.jsx`
+2. Does it need styles? → Add to `styles/components/[name].css`
+3. Is it reusable? → Add to `styles/utilities.css`
+4. Does it need animation? → Add to `styles/animations.css`
+5. Does it need theme support? → Add overrides to `styles/themes/light.css`
+6. Is it a new page? → Create in `pages/` and wrap with `<Layout>`
+7. Does it need state/logic? → Create custom hook in `hooks/`

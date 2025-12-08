@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Skills Component Styles
+   Skill items, tooltips, category cards
+   ========================================================================== */
+
+/* ==========================================================================
+   Skill Item
+   ========================================================================== */
+
+.skill-item {
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.skill-item > div:first-child {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.skill-item:hover > div:first-child {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   Skill Tooltip
+   ========================================================================== */
+
+.skill-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(187, 0, 14, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(187, 0, 14, 0.15);
+  pointer-events: none;
+}
+
+/* Tooltip arrow */
+.skill-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(30, 30, 30, 0.95);
+}
+
+/* Show tooltip on hover */
+.skill-item:hover .skill-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   Skill Category Card
+   ========================================================================== */
+
+.skill-category:hover {
+  box-shadow: 0 0 30px rgba(187, 0, 14, 0.1), 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
