@@ -20,8 +20,8 @@ const Portfolio = ({ projects }) => {
       <SEO
         title="Portfolio & Projects - Jose Gabriel Jiménez"
         description="Explore Jose Gabriel Jiménez's portfolio featuring innovative web and mobile applications. View projects built with React, Next.js, Node.js, React Native, and modern technologies. Showcasing full-stack development expertise across e-commerce platforms, booking systems, and scalable web solutions."
-        keywords="Jose Gabriel Jimenez Portfolio, Web Development Projects, React Projects, Next.js Applications, Full-Stack Projects, Mobile Apps, React Native Projects, JavaScript Portfolio, Web Developer Work, josegabjimenez projects, josegab.dev portfolio"
-        url="https://josegab.dev/portfolio"
+        keywords="Jose Gabriel Jimenez Portfolio, Web Development Projects, React Projects, Next.js Applications, Full-Stack Projects, Mobile Apps, React Native Projects, JavaScript Portfolio, Web Developer Work, josegabjimenez projects, josegabjimenez.dev portfolio"
+        url="https://josegabjimenez.dev/portfolio"
         type="website"
       />
       <h1 className="text-5xl sm:text-7xl mb-8 font-extrabold">Projects 🔨</h1>

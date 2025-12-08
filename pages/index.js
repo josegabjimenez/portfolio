@@ -72,8 +72,8 @@ export default function Home() {
       <SEO
         title="Jose Gabriel Jiménez | Full-Stack Developer"
         description="Experienced Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications that deliver exceptional user experiences and business impact."
-        keywords="Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Backend Developer, Next.js Developer, Node.js, JavaScript, TypeScript, React Native, Portfolio, josegabjimenez, josegab.dev, Systems Engineer"
-        url="https://josegab.dev"
+        keywords="Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Backend Developer, Next.js Developer, Node.js, JavaScript, TypeScript, React Native, Portfolio, josegabjimenez, josegabjimenez.dev, Systems Engineer"
+        url="https://josegabjimenez.dev"
         type="website"
       />
 
@@ -86,34 +86,16 @@ export default function Home() {
             '@type': 'Person',
             name: 'Jose Gabriel Jiménez',
             alternateName: 'Jose Gabriel Jimenez Vidales',
-            url: 'https://josegab.dev',
-            image: 'https://josegab.dev/og-image.jpg',
+            url: 'https://josegabjimenez.dev',
+            image: 'https://josegabjimenez.dev/og-image.png',
             jobTitle: 'Full-Stack Developer',
             worksFor: {
               '@type': 'Organization',
               name: 'Team International',
             },
-            description:
-              'Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications.',
-            knowsAbout: [
-              'React',
-              'Next.js',
-              'Node.js',
-              'JavaScript',
-              'TypeScript',
-              'React Native',
-              'HTML',
-              'CSS',
-              'Tailwind CSS',
-              'Web Development',
-              'Mobile Development',
-              'Full-Stack Development',
-            ],
-            sameAs: [
-              'https://github.com/josegabjimenez',
-              'https://linkedin.com/in/josegabjimenez',
-              'https://twitter.com/josegabjimenez',
-            ],
+            description: 'Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications.',
+            knowsAbout: ['React', 'Next.js', 'Node.js', 'JavaScript', 'TypeScript', 'React Native', 'HTML', 'CSS', 'Tailwind CSS', 'Web Development', 'Mobile Development', 'Full-Stack Development'],
+            sameAs: ['https://github.com/josegabjimenez', 'https://linkedin.com/in/josegabjimenez', 'https://twitter.com/josegabjimenez'],
             address: {
               '@type': 'PostalAddress',
               addressCountry: 'MX',

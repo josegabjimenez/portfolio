@@ -3,9 +3,9 @@ import Head from 'next/head';
 const SEO = ({
   title = 'Jose Gabriel Jiménez | Full-Stack Developer',
   description = 'Experienced Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications that deliver exceptional user experiences and business impact.',
-  keywords = 'Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Next.js, Node.js, JavaScript, TypeScript, React Native, Web Development, Software Engineer, Portfolio, josegabjimenez, josegab.dev',
-  image = '/og-image.jpg',
-  url = 'https://josegab.dev',
+  keywords = 'Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Next.js, Node.js, JavaScript, TypeScript, React Native, Web Development, Software Engineer, Portfolio, josegabjimenez, josegabjimenez.dev',
+  image = '/og-image.png',
+  url = 'https://josegabjimenez.dev',
   type = 'website',
   author = 'Jose Gabriel Jiménez',
   twitterHandle = '@josegabjimenez',

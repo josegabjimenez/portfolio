@@ -229,8 +229,8 @@ const About = ({ skills }) => {
       <SEO
         title="About Jose Gabriel Jiménez"
         description="Learn about Jose Gabriel Jiménez, a passionate Full-Stack Developer with 3+ years of experience in web and mobile app development. Specializing in React, Next.js, Node.js, and React Native, with expertise in building scalable applications across frontend and backend technologies."
-        keywords="Jose Gabriel Jimenez, About Jose Gabriel, Full-Stack Developer Bio, React Expert, Next.js Developer, Node.js Developer, Web Developer Portfolio, Mobile Developer, Frontend Expert, Backend Developer, josegabjimenez bio, josegab.dev about"
-        url="https://josegab.dev/about"
+        keywords="Jose Gabriel Jimenez, About Jose Gabriel, Full-Stack Developer Bio, React Expert, Next.js Developer, Node.js Developer, Web Developer Portfolio, Mobile Developer, Frontend Expert, Backend Developer, josegabjimenez bio, josegabjimenez.dev about"
+        url="https://josegabjimenez.dev/about"
         type="profile"
       />
 

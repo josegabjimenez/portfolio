@@ -68,8 +68,8 @@ const Contact = () => {
       <SEO
         title="Contact Jose Gabriel Jiménez"
         description="Get in touch with Jose Gabriel Jiménez for web development projects, collaborations, or job opportunities. Reach out via email to discuss your next React, Next.js, or full-stack development project. Available for freelance and full-time opportunities."
-        keywords="Contact Jose Gabriel Jimenez, Hire Full-Stack Developer, Web Developer Contact, React Developer for Hire, Next.js Expert Contact, josegabjimenez contact, josegab.dev contact, Email Jose Gabriel, Web Development Services"
-        url="https://josegab.dev/contact"
+        keywords="Contact Jose Gabriel Jimenez, Hire Full-Stack Developer, Web Developer Contact, React Developer for Hire, Next.js Expert Contact, josegabjimenez contact, josegabjimenez.dev contact, Email Jose Gabriel, Web Development Services"
+        url="https://josegabjimenez.dev/contact"
         type="website"
       />
       <article className="sm:text-left text-center ">

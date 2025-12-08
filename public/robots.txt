@@ -1,4 +1,4 @@
-# robots.txt for josegab.dev
+# robots.txt for josegabjimenez.dev
 
 User-agent: *
 Allow: /
@@ -13,4 +13,4 @@ Allow: /contact
 Allow: /portfolio
 
 # Sitemap location
-Sitemap: https://josegab.dev/sitemap.xml
+Sitemap: https://josegabjimenez.dev/sitemap.xml
