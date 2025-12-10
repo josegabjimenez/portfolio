@@ -5,6 +5,9 @@ import { SEO } from '@components/index';
 
 // Animations
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Icons
 import { FaBriefcase, FaCode, FaServer, FaTools, FaMobile, FaDatabase } from 'react-icons/fa';
@@ -202,25 +205,127 @@ const About = ({ skills }) => {
   const categorizedSkills = categorizeSkills(skills);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    // Animate profile card
-    tl.fromTo(profileRef.current, { opacity: 0, y: 50, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8 });
+      // Animate profile card
+      tl.fromTo(profileRef.current, { opacity: 0, y: 50, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.8 });
 
-    // Animate bio section
-    tl.fromTo(bioRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
+      // Animate bio section
+      tl.fromTo(bioRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
 
-    // Animate skills section
-    tl.fromTo(skillsRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
+      // Animate skills section
+      tl.fromTo(skillsRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
 
-    // Animate skill categories with stagger
-    tl.fromTo('.skill-category', { opacity: 0, y: 20, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1 }, '-=0.3');
+      // Animate skill categories with stagger
+      tl.fromTo('.skill-category', { opacity: 0, y: 20, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1 }, '-=0.3');
 
-    // Animate timeline section
-    tl.fromTo(timelineRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.2');
+      // Animate timeline section header
+      tl.fromTo(timelineRef.current?.querySelector('h2'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.2');
 
-    // Animate timeline items with stagger
-    tl.fromTo('.timeline-item', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.15 }, '-=0.3');
+      // Parallax effects for smooth scrolling
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        // Skills cards parallax with stagger effect (removed profile/bio parallax to prevent jiggle)
+        gsap.utils.toArray('.skill-category').forEach((card, i) => {
+          gsap.to(card, {
+            y: 15 + (i * 3),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              end: 'bottom 10%',
+              scrub: 1 + (i * 0.1),
+            },
+          });
+        });
+
+        // Timeline items - scroll-triggered reveal animation
+        gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+          const isEven = i % 2 === 0;
+          
+          // Set initial state
+          gsap.set(item, {
+            opacity: 0,
+            x: isEven ? 60 : -60,
+            y: 30,
+          });
+
+          // Animate in when scrolling into view
+          gsap.to(item, {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 85%',
+              end: 'top 50%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+
+          // Animate the timeline dot
+          const dot = item.querySelector('.timeline-dot');
+          if (dot) {
+            gsap.set(dot, { scale: 0 });
+            gsap.to(dot, {
+              scale: 1,
+              duration: 0.5,
+              ease: 'back.out(1.7)',
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse',
+              },
+            });
+          }
+
+          // Animate the card content
+          const card = item.querySelector('.glass-card');
+          if (card) {
+            gsap.set(card, { 
+              opacity: 0,
+              scale: 0.95,
+            });
+            gsap.to(card, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.6,
+              delay: 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse',
+              },
+            });
+          }
+        });
+
+        // Animate the timeline line - grows as user scrolls through timeline
+        const timelineLine = document.querySelector('.timeline-line');
+        if (timelineLine) {
+          gsap.fromTo(timelineLine, 
+            { scaleY: 0, transformOrigin: 'top' },
+            {
+              scaleY: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: timelineRef.current,
+                start: 'top 80%',
+                end: 'bottom 50%', // Line completes when bottom of timeline reaches middle of viewport
+                scrub: 0.5,
+              },
+            }
+          );
+        }
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -286,17 +391,17 @@ const About = ({ skills }) => {
 
         {/* Skills Section */}
         <div ref={skillsRef} className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center scroll-fade-up">
             My <span className="text-gradient">Skills</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.entries(categorizedSkills).map(([category, categorySkills]) => {
+            {Object.entries(categorizedSkills).map(([category, categorySkills], index) => {
               if (categorySkills.length === 0) return null;
               const CategoryIcon = skillCategories[category].icon;
 
               return (
-                <div key={category} className="skill-category glass-card p-6 about-card hover:border-primary/30 transition-all duration-300">
+                <div key={category} className={`skill-category glass-card p-6 about-card hover:border-primary/30 transition-all duration-300 scroll-fade-up scroll-delay-${(index + 1) * 100}`}>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
                       <CategoryIcon className="text-primary text-xl" />

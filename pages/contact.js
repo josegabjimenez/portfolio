@@ -73,8 +73,8 @@ const Contact = () => {
         type="website"
       />
       <article className="sm:text-left text-center ">
-        <h1 className="sm:text-7xl text-5xl font-extrabold">Send me an email ✉</h1>
-        <form ref={form} onSubmit={handleSubmit} className="form-control w-full">
+        <h1 className="sm:text-7xl text-5xl font-extrabold scroll-fade-up">Send me an email ✉</h1>
+        <form ref={form} onSubmit={handleSubmit} className="form-control w-full scroll-fade-up scroll-delay-200">
           {/* User name */}
           <label htmlFor="user_name" className="label mt-2">
             <span className="label-text">What is your name?</span>

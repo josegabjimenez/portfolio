@@ -10,9 +10,38 @@ import { getProjects } from '@pages/api/projects/index';
 
 const Portfolio = ({ projects }) => {
   const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const cardsRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1 });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Animate title
+      tl.fromTo(titleRef.current, 
+        { opacity: 0, y: 50 }, 
+        { opacity: 1, y: 0, duration: 0.8 }
+      );
+
+      // Animate all project cards with stagger on load
+      const cards = cardsRef.current?.querySelectorAll('.project-card');
+      if (cards && cards.length > 0) {
+        tl.fromTo(cards, 
+          { opacity: 0, y: 40, scale: 0.95 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            duration: 0.6, 
+            stagger: 0.08, // Fast stagger for smooth cascade effect
+            ease: 'power2.out'
+          }, 
+          '-=0.4'
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -24,12 +53,12 @@ const Portfolio = ({ projects }) => {
         url="https://josegabjimenez.dev/portfolio"
         type="website"
       />
-      <h1 className="text-5xl sm:text-7xl mb-8 font-extrabold">Projects 🔨</h1>
+      <h1 ref={titleRef} className="text-5xl sm:text-7xl mb-8 font-extrabold">Projects 🔨</h1>
       {/* <section className="grid grid-flow-col auto-cols-max gap-4 w-4/5 "> */}
-      <section className="flex flex-wrap justify-center gap-4 w-4/5 ">
+      <section ref={cardsRef} className="flex flex-wrap justify-center gap-4 w-4/5 ">
         {/* {console.log(projects)} */}
         {projects.map((project) => (
-          <div key={project.title}>
+          <div key={project.title} className="project-card">
             <Card project={project} />
           </div>
         ))}

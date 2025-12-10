@@ -91,3 +91,277 @@
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   Scroll Reveal Keyframes
+   ========================================================================== */
+
+@keyframes scrollFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scrollBlurIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Scroll Reveal Animation Classes
+   Uses CSS scroll-driven animations for modern browsers
+   Falls back to intersection observer pattern for older browsers
+   ========================================================================== */
+
+/* Base class - elements start hidden */
+.scroll-reveal {
+  opacity: 0;
+}
+
+/* When element is in view (add .in-view class via JS or use animation) */
+.scroll-reveal.in-view {
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Fade in up - most common reveal */
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in down */
+.scroll-fade-down {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-fade-down.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in left */
+.scroll-fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-fade-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade in right */
+.scroll-fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-fade-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale in */
+.scroll-scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-scale-in.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Blur in */
+.scroll-blur-in {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-blur-in.in-view {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Simple fade */
+.scroll-fade {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-fade.in-view {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Animation Delays for Staggered Effects
+   ========================================================================== */
+
+.scroll-delay-100 {
+  transition-delay: 0.1s;
+}
+.scroll-delay-200 {
+  transition-delay: 0.2s;
+}
+.scroll-delay-300 {
+  transition-delay: 0.3s;
+}
+.scroll-delay-400 {
+  transition-delay: 0.4s;
+}
+.scroll-delay-500 {
+  transition-delay: 0.5s;
+}
+.scroll-delay-600 {
+  transition-delay: 0.6s;
+}
+.scroll-delay-700 {
+  transition-delay: 0.7s;
+}
+.scroll-delay-800 {
+  transition-delay: 0.8s;
+}
+
+/* ==========================================================================
+   Parallax Classes
+   Speed modifiers for parallax scrolling effects
+   ========================================================================== */
+
+/* Parallax containers need relative/fixed positioning */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Parallax speed utilities - applied via GSAP or CSS transforms */
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-medium {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}
+
+/* Floating parallax effect for decorative elements */
+.parallax-float {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ==========================================================================
+   Smooth Scroll Enhancements
+   ========================================================================== */
+
+/* Ensure smooth transitions during scroll */
+.smooth-element {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Parallax depth layers */
+.depth-1 {
+  --parallax-speed: 0.1;
+}
+
+.depth-2 {
+  --parallax-speed: 0.2;
+}
+
+.depth-3 {
+  --parallax-speed: 0.3;
+}
+
+.depth-4 {
+  --parallax-speed: 0.4;
+}
+
+.depth-5 {
+  --parallax-speed: 0.5;
+}
