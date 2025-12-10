@@ -56,12 +56,68 @@ export default function Home() {
   // Hero animations
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Initial entrance animations
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       tl.fromTo(titleRef.current, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 1 })
         .fromTo(roleRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
         .fromTo(descriptionRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
         .fromTo(ctaRef.current?.children || [], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, '-=0.2');
+
+      // Parallax scrolling effects - elements move at different speeds
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        // Title parallax - slower movement creates depth
+        gsap.to(titleRef.current, {
+          y: 100,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        });
+
+        // Role text - medium speed
+        gsap.to(roleRef.current, {
+          y: 80,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.2,
+          },
+        });
+
+        // Description - slightly faster
+        gsap.to(descriptionRef.current, {
+          y: 60,
+          opacity: 0.3,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        });
+
+        // CTA buttons - fastest
+        gsap.to(ctaRef.current, {
+          y: 40,
+          opacity: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: '50% top',
+            scrub: 0.8,
+          },
+        });
+      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -108,7 +164,7 @@ export default function Home() {
       <section ref={heroRef} className="relative z-10 min-h-[calc(100vh-10rem)] flex items-center justify-center px-6 py-12">
         <div className="max-w-4xl mx-auto text-center">
           {/* Intro Badge */}
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 text-sm text-white/70">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 text-sm text-white/70 scroll-fade-down">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
             Available for new opportunities
           </div>
