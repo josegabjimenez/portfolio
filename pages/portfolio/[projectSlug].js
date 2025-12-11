@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import useWindowSize from '@hooks/useWindowSize';
 import { Hero } from '@components/index';
-import { Splide, SplideSlide } from '@splidejs/react-splide'; // Carousel
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-//API
-// import endPoints from '@services/endPoints';
+// API
 import { getProject } from '@pages/api/projects/[projectSlug]';
-
-//Icons
-import { MdDone, MdOutlineArrowBack } from 'react-icons/md';
-import { RiToolsFill, RiGithubFill, RiEyeFill } from 'react-icons/ri';
-import '@splidejs/react-splide/css';
 import { getProjects } from '@pages/api/projects/index';
 
-const Project = ({ project }) => {
-  const size = useWindowSize();
-  const [maxSlideHeight, setMaxSlideHeight] = React.useState(0);
-  const carouselRef = React.useRef(null);
+// Icons
+import { MdOutlineArrowBack } from 'react-icons/md';
+import { RiGithubFill, RiExternalLinkLine } from 'react-icons/ri';
+import '@splidejs/react-splide/css';
 
-  const recalcMaxSlideHeight = React.useCallback(() => {
+const Project = ({ project }) => {
+  const [maxSlideHeight, setMaxSlideHeight] = useState(0);
+  const carouselRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const recalcMaxSlideHeight = useCallback(() => {
     if (!carouselRef.current) return;
     const imgs = carouselRef.current.querySelectorAll('img');
     let max = 0;
@@ -33,129 +31,157 @@ const Project = ({ project }) => {
     if (max > 0) setMaxSlideHeight(max);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onResize = () => recalcMaxSlideHeight();
     window.addEventListener('resize', onResize);
-    // Initial calc once images/layout settle
-    const id = setTimeout(recalcMaxSlideHeight, 0);
+    const id = setTimeout(recalcMaxSlideHeight, 100);
     return () => {
       window.removeEventListener('resize', onResize);
       clearTimeout(id);
     };
   }, [recalcMaxSlideHeight]);
-  // console.log(project);
+
+  // Animate content sections on mount
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const sections = contentRef.current.querySelectorAll('.project-glass-section');
+    sections.forEach((section, index) => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(40px)';
+      setTimeout(() => {
+        section.style.transition = 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)';
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+      }, 400 + index * 150);
+    });
+  }, []);
+
   return (
-    <main className="flex flex-col justify-center items-center w-full">
+    <main className="flex flex-col w-full min-h-screen">
       <Head>
-        <title>{project.title}</title>
-        <meta name="description" content={`${project.title} project page`} />
+        <title>{project.title} | Jose Gabriel Jimenez</title>
+        <meta name="description" content={project.description?.slice(0, 160) || `${project.title} project page`} />
       </Head>
+
+      {/* Back Button - Fixed position */}
+      <Link href="/portfolio" className="project-back-btn">
+        <MdOutlineArrowBack className="text-xl" />
+        <span>Back</span>
+      </Link>
+
+      {/* Hero Section */}
       <Hero data={project} />
-      <section className={`content w-11/12 lg:w-1/2 xl:w-1/3 text-justify mb-8`}>
-        <div className="flex justify-between items-center">
-          <Link href="/portfolio">
-            <button className="btn btn-outline btn-primary btn-sm">
-              <MdOutlineArrowBack />
-              Go back
-            </button>
-          </Link>
 
-          {project.is_finished ? (
-            <div className="badge badge-success">
-              <MdDone className="mr-1" /> Done
-            </div>
-          ) : (
-            <div className="badge badge-warning">
-              <RiToolsFill className="mr-1" />
-              Working
-            </div>
-          )}
-        </div>
-        <div className="mt-8">
-          <p className="text-justify">{project.description}</p>
+      {/* Content Section */}
+      <div className="project-content mx-auto" ref={contentRef}>
+        {/* Description & Actions Card */}
+        <section className="project-glass-section">
+          <p className="project-description">{project.description}</p>
 
-          {/* Source Code button */}
-          {project.github_link && !project.is_private && (
-            <a className="" href={project.github_link} target="_blank" rel="noreferrer">
-              <div className="btn btn-outline btn-secondary flex items-center gap-2 mt-2">
-                <RiGithubFill />
-                Source Code
-              </div>
-            </a>
-          )}
-          {/* Live Version button */}
-          {project.project_link && (
-            <a className="" href={project.project_link} target="_blank" rel="noreferrer">
-              <div className="btn btn-outline btn-accent flex items-center gap-2 mt-2">
-                <RiEyeFill />
-                Live Version
-              </div>
-            </a>
-          )}
+          {/* Action Buttons */}
+          <div className="project-actions">
+            {project.github_link && !project.is_private && (
+              <a
+                href={project.github_link}
+                target="_blank"
+                rel="noreferrer"
+                className="project-btn project-btn-glass"
+              >
+                <RiGithubFill className="project-btn-icon" />
+                <span>View Source Code</span>
+              </a>
+            )}
 
-          {/* Technologies */}
+            {project.project_link && (
+              <a
+                href={project.project_link}
+                target="_blank"
+                rel="noreferrer"
+                className="project-btn project-btn-primary"
+              >
+                <RiExternalLinkLine className="project-btn-icon" />
+                <span>Live Demo</span>
+              </a>
+            )}
+          </div>
+        </section>
 
-          <h3 className="text-2xl font-bold mt-8">Technologies used</h3>
-          <div className="flex flex-wrap justify-center mt-8 gap-4">
+        {/* Technologies Card */}
+        <section className="project-glass-section">
+          <h2 className="project-section-title">Technologies Used</h2>
+          <div className="project-tech-grid">
             {project.technologies.map((tech) => (
               <div
                 key={`${project.title}-tech-${tech.name}`}
-                style={{ borderColor: tech.bg_color }}
-                className={`cursor-pointer border-2 text-base-100 font-bold relative  pr-2 mt-5 rounded-md min-w-max`}
+                className="project-tech-badge"
               >
-                <div style={{ backgroundColor: tech.bg_color }} className="flex justify-center items-center absolute -left-2 -top-3 h-12 w-12 rounded-md">
-                  <div className="relative w-11/12 object-cover h-11/12 p-4">
-                    <Image fill className="object-contain" src={tech.image} alt={`${tech.name} technology`} />
-                  </div>
-                  {/* <img className="w-11/12 object-cover h-11/12" src={tech.image} alt={`${tech.name} technology`} /> */}
+                <div className="relative w-6 h-6 flex-shrink-0">
+                  <Image
+                    src={tech.image}
+                    alt={tech.name}
+                    fill
+                    className="project-tech-icon object-contain"
+                  />
                 </div>
-                <p className="ml-12 text-white">{tech.name}</p>
+                <span>{tech.name}</span>
               </div>
             ))}
           </div>
+        </section>
 
-          {/* Images carousel */}
-          <h3 className="text-2xl font-bold mt-10">Some images</h3>
-          <div className="rounded-md glass-card overflow-hidden mt-8 text-center" ref={carouselRef}>
-            <Splide aria-label="My Favorite Images" options={{ rewind: true }}>
-              {project.images.map((image, index) => (
-                <SplideSlide key={`${project.title}-image-${index + 1}`}>
-                  <div className="w-full bg-base-200 flex items-center justify-center overflow-hidden" style={{ height: maxSlideHeight ? `${maxSlideHeight}px` : undefined }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img onLoad={recalcMaxSlideHeight} className="max-w-full max-h-full object-contain" src={image} alt={`Project ${index + 1}`} />
-                  </div>
-                </SplideSlide>
-              ))}
-            </Splide>
-          </div>
-        </div>
-      </section>
+        {/* Gallery Card */}
+        {project.images && project.images.length > 0 && (
+          <section className="project-glass-section">
+            <h2 className="project-section-title">Project Gallery</h2>
+            <div className="project-gallery" ref={carouselRef}>
+              <Splide
+                aria-label={`${project.title} Gallery`}
+                options={{
+                  rewind: true,
+                  gap: '1rem',
+                  padding: { left: 0, right: 0 },
+                  pagination: true,
+                  arrows: project.images.length > 1,
+                }}
+              >
+                {project.images.map((image, index) => (
+                  <SplideSlide key={`${project.title}-image-${index + 1}`}>
+                    <div
+                      className="project-gallery-slide"
+                      style={{
+                        height: maxSlideHeight ? `${maxSlideHeight}px` : '400px',
+                        minHeight: '300px',
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        onLoad={recalcMaxSlideHeight}
+                        className="project-gallery-image"
+                        src={image}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                      />
+                    </div>
+                  </SplideSlide>
+                ))}
+              </Splide>
+            </div>
+          </section>
+        )}
+      </div>
 
-      {/* Some styles in JSX */}
-      <style>
-        {`
-          .content {
-            margin-top: ${Math.floor(size.height * 0.45)}px;
-            min-height: ${Math.floor(size.height * 0.3)}px;
-          }
-        `}
-      </style>
+      {/* Bottom spacer */}
+      <div className="h-20 md:h-8" />
     </main>
   );
 };
 
 export const getStaticPaths = async () => {
   const projects = await getProjects();
-  // const res = await fetch(endPoints.projects.getAll);
-  // const data = await res.json();
-
-  const paths = projects.map((project) => {
-    return {
-      params: {
-        projectSlug: project.slug,
-      },
-    };
-  });
+  const paths = projects.map((project) => ({
+    params: {
+      projectSlug: project.slug,
+    },
+  }));
 
   return {
     paths,
@@ -166,13 +192,18 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const { projectSlug } = params;
   const project = await getProject(projectSlug);
-  // const res = await fetch(endPoints.projects.get(projectSlug));
-  // const { project } = await res.json();
+
+  if (!project) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       project: JSON.parse(JSON.stringify(project)),
     },
-    revalidate: 60, // This will re-generate the page if there is a new request each 60 seconds
+    revalidate: 60,
   };
 };
 
