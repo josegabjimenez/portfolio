@@ -11,29 +11,36 @@
   position: relative;
   min-height: 70vh;
   width: 100%;
+  /* Extend behind navbar - negative margin and padding to compensate */
+  margin-top: -5rem;
+  padding-top: 5rem;
+}
+
+/* Container for the background image - this gets overflow hidden */
+.project-hero-bg-container {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
 .project-hero-bg {
   object-fit: cover !important;
   filter: blur(8px) brightness(0.4);
-  transform: scale(1.1);
-  transition: transform 0.8s ease-out;
 }
 
-.project-hero:hover .project-hero-bg {
-  transform: scale(1.15);
+/* Parallax container - transform controlled by JS */
+.project-hero > div:first-child {
+  will-change: transform;
 }
 
 .project-hero-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.4) 0%,
-    rgba(10, 10, 10, 0.6) 50%,
-    rgba(10, 10, 10, 0.95) 100%
-  );
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -100px;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.5) 35%, rgba(10, 10, 10, 0.75) 60%, rgba(10, 10, 10, 0.9) 80%, transparent 100%);
+  pointer-events: none;
 }
 
 .project-hero-content {
@@ -44,7 +51,7 @@
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  min-height: 70vh;
+  min-height: calc(70vh - 5rem);
   padding-bottom: 4rem;
 }
 
@@ -113,11 +120,7 @@
    ========================================================================== */
 
 .project-glass-section {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -179,11 +182,7 @@
 }
 
 .project-btn-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -191,11 +190,7 @@
 }
 
 .project-btn-glass:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
   border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -289,11 +284,7 @@
   align-items: center;
   gap: 0.625rem;
   padding: 0.625rem 1rem;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -339,11 +330,6 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.5s ease;
-}
-
-.project-gallery-slide:hover .project-gallery-image {
-  transform: scale(1.02);
 }
 
 /* Splide customization */
@@ -440,16 +426,36 @@
 }
 
 /* Generate stagger delays for tech badges */
-.project-tech-badge:nth-child(1) { animation-delay: 0.4s; }
-.project-tech-badge:nth-child(2) { animation-delay: 0.45s; }
-.project-tech-badge:nth-child(3) { animation-delay: 0.5s; }
-.project-tech-badge:nth-child(4) { animation-delay: 0.55s; }
-.project-tech-badge:nth-child(5) { animation-delay: 0.6s; }
-.project-tech-badge:nth-child(6) { animation-delay: 0.65s; }
-.project-tech-badge:nth-child(7) { animation-delay: 0.7s; }
-.project-tech-badge:nth-child(8) { animation-delay: 0.75s; }
-.project-tech-badge:nth-child(9) { animation-delay: 0.8s; }
-.project-tech-badge:nth-child(10) { animation-delay: 0.85s; }
+.project-tech-badge:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.project-tech-badge:nth-child(2) {
+  animation-delay: 0.45s;
+}
+.project-tech-badge:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.project-tech-badge:nth-child(4) {
+  animation-delay: 0.55s;
+}
+.project-tech-badge:nth-child(5) {
+  animation-delay: 0.6s;
+}
+.project-tech-badge:nth-child(6) {
+  animation-delay: 0.65s;
+}
+.project-tech-badge:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.project-tech-badge:nth-child(8) {
+  animation-delay: 0.75s;
+}
+.project-tech-badge:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.project-tech-badge:nth-child(10) {
+  animation-delay: 0.85s;
+}
 
 /* ==========================================================================
    Responsive Design
@@ -461,7 +467,7 @@
   }
 
   .project-hero-content {
-    min-height: 60vh;
+    min-height: calc(60vh - 5rem);
     padding-bottom: 3rem;
   }
 

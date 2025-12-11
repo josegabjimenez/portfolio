@@ -1,12 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { MdDone } from 'react-icons/md';
 import { RiToolsFill } from 'react-icons/ri';
 
 const Hero = ({ data }) => {
   const heroRef = useRef(null);
+  const bgRef = useRef(null);
   const titleRef = useRef(null);
   const badgeRef = useRef(null);
+
+  // Parallax scroll effect
+  const handleScroll = useCallback(() => {
+    if (!heroRef.current || !bgRef.current) return;
+
+    const scrollY = window.scrollY;
+    const heroHeight = heroRef.current.offsetHeight;
+
+    // Only apply parallax when hero is visible
+    if (scrollY < heroHeight) {
+      const parallaxOffset = scrollY * 0.3;
+      const scale = 1.1 + (scrollY / heroHeight) * 0.1;
+      bgRef.current.style.transform = `scale(${scale}) translateY(${parallaxOffset}px)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    // Set initial transform immediately to prevent jiggle on first scroll
+    if (bgRef.current) {
+      bgRef.current.style.transform = 'scale(1.1) translateY(0px)';
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     // Simple fade-in animation on mount
@@ -47,17 +72,14 @@ const Hero = ({ data }) => {
 
   return (
     <section className="project-hero" ref={heroRef}>
-      {/* Background Image with blur */}
-      <Image
-        className="project-hero-bg"
-        src={data.images[0]}
-        alt={`${data.title} Background`}
-        fill
-        priority
-        sizes="100vw"
-      />
+      {/* Background container with overflow hidden for the scaled image */}
+      <div className="project-hero-bg-container">
+        <div ref={bgRef} className="absolute inset-0">
+          <Image className="project-hero-bg" src={data.images[0]} alt={`${data.title} Background`} fill priority sizes="100vw" />
+        </div>
+      </div>
 
-      {/* Gradient Overlay */}
+      {/* Gradient Overlay - extends beyond hero for smooth fade */}
       <div className="project-hero-overlay" />
 
       {/* Decorative Elements */}
