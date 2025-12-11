@@ -66,7 +66,7 @@ export default function Home() {
 
       // Parallax scrolling effects - elements move at different speeds
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
+
       if (!prefersReducedMotion) {
         // Title parallax - slower movement creates depth
         gsap.to(titleRef.current, {
@@ -126,9 +126,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Jose Gabriel Jiménez | Full-Stack Developer"
+        title="Jose Gabriel Jiménez Vidales | Full-Stack Developer"
         description="Experienced Full-Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. Building scalable web and mobile applications that deliver exceptional user experiences and business impact."
-        keywords="Jose Gabriel Jimenez, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Backend Developer, Next.js Developer, Node.js, JavaScript, TypeScript, React Native, Portfolio, josegabjimenez, josegabjimenez.dev, Systems Engineer"
+        keywords="Jose Gabriel Jimenez Vidales, Full-Stack Developer, Web Developer, React Developer, Frontend Developer, Backend Developer, Next.js Developer, Node.js, JavaScript, TypeScript, React Native, Portfolio, josegabjimenez, josegabjimenez.dev, Systems Engineer, Jose Gabriel Jimenez, Jose Gabriel, jose gabriel, jose gabriel jimenez, jose gabriel jimenez vidales, Jose Gabriel Jiménez Vidales"
         url="https://josegabjimenez.dev"
         type="website"
       />
