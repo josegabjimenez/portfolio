@@ -166,3 +166,6 @@ export const useParallaxFade = (options = {}) => {
 
 export default useParallax;
 
+
+
+

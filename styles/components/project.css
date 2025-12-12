@@ -1,0 +1,498 @@
+/* ==========================================================================
+   Project Page Styles
+   Glassmorphism design for individual project pages
+   ========================================================================== */
+
+/* ==========================================================================
+   Project Hero Section
+   ========================================================================== */
+
+.project-hero {
+  position: relative;
+  min-height: 70vh;
+  width: 100%;
+  /* Extend behind navbar - negative margin and padding to compensate */
+  margin-top: -5rem;
+  padding-top: 5rem;
+}
+
+/* Container for the background image - this gets overflow hidden */
+.project-hero-bg-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.project-hero-bg {
+  object-fit: cover !important;
+  filter: blur(8px) brightness(0.4);
+}
+
+/* Parallax container - transform controlled by JS */
+.project-hero-bg-parallax {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.project-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -100px;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.5) 35%, rgba(10, 10, 10, 0.75) 60%, rgba(10, 10, 10, 0.9) 80%, transparent 100%);
+  pointer-events: none;
+}
+
+.project-hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-height: calc(70vh - 5rem);
+  padding-bottom: 4rem;
+}
+
+.project-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: white;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+.project-title-accent {
+  font-family: 'Cormorant', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--primary-light);
+}
+
+/* ==========================================================================
+   Project Status Badge
+   ========================================================================== */
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.project-status-done {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.project-status-working {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #facc15;
+}
+
+/* ==========================================================================
+   Project Content Section
+   ========================================================================== */
+
+.project-content {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 1.5rem;
+  margin-top: -3rem;
+}
+
+/* ==========================================================================
+   Glass Sections
+   ========================================================================== */
+
+.project-glass-section {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-glass-section:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   Project Description
+   ========================================================================== */
+
+.project-description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   Project Action Buttons
+   ========================================================================== */
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.project-btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+}
+
+.project-btn-primary:hover {
+  background: var(--primary-light);
+  box-shadow: 0 0 30px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+.project-btn-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.project-btn-glass:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-btn-icon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.project-btn:hover .project-btn-icon {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Back Button
+   ========================================================================== */
+
+.project-back-btn {
+  position: fixed;
+  top: 6rem;
+  left: 2rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.project-back-btn:hover {
+  background: rgba(10, 10, 10, 0.8);
+  border-color: var(--primary);
+  color: var(--primary-light);
+  transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+  .project-back-btn {
+    top: auto;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+
+  .project-back-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+/* ==========================================================================
+   Technologies Section
+   ========================================================================== */
+
+.project-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.project-section-title::before {
+  content: '';
+  width: 4px;
+  height: 1.25rem;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.project-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.project-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.project-tech-badge:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-tech-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Image Gallery Section
+   ========================================================================== */
+
+.project-gallery {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.project-gallery-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.project-gallery-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Splide customization */
+.project-gallery .splide__arrow {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  width: 3rem;
+  height: 3rem;
+  transition: all 0.3s ease;
+}
+
+.project-gallery .splide__arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
+}
+
+.project-gallery .splide__arrow svg {
+  fill: white;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.project-gallery .splide__pagination__page {
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.project-gallery .splide__pagination__page.is-active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.project-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: projectFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.project-fade-in-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.project-fade-in-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.project-fade-in-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.project-fade-in-delay-4 {
+  animation-delay: 0.4s;
+}
+
+@keyframes projectFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: projectScaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes projectScaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered tech badges animation */
+.project-tech-badge {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: techBadgeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes techBadgeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Generate stagger delays for tech badges */
+.project-tech-badge:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.project-tech-badge:nth-child(2) {
+  animation-delay: 0.45s;
+}
+.project-tech-badge:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.project-tech-badge:nth-child(4) {
+  animation-delay: 0.55s;
+}
+.project-tech-badge:nth-child(5) {
+  animation-delay: 0.6s;
+}
+.project-tech-badge:nth-child(6) {
+  animation-delay: 0.65s;
+}
+.project-tech-badge:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.project-tech-badge:nth-child(8) {
+  animation-delay: 0.75s;
+}
+.project-tech-badge:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.project-tech-badge:nth-child(10) {
+  animation-delay: 0.85s;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .project-hero {
+    min-height: 60vh;
+  }
+
+  .project-hero-content {
+    min-height: calc(60vh - 5rem);
+    padding-bottom: 3rem;
+  }
+
+  .project-content {
+    margin-top: -2rem;
+    padding: 0 1rem;
+  }
+
+  .project-glass-section {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .project-description {
+    font-size: 1rem;
+  }
+
+  .project-actions {
+    flex-direction: column;
+  }
+
+  .project-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
