@@ -45,15 +45,23 @@ const Project = ({ project }) => {
   useEffect(() => {
     if (!contentRef.current) return;
     const sections = contentRef.current.querySelectorAll('.project-glass-section');
+    const timeoutIds = [];
+
     sections.forEach((section, index) => {
       section.style.opacity = '0';
       section.style.transform = 'translateY(40px)';
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         section.style.transition = 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)';
         section.style.opacity = '1';
         section.style.transform = 'translateY(0)';
       }, 400 + index * 150);
+      timeoutIds.push(timeoutId);
     });
+
+    // Cleanup all timeouts on unmount to prevent memory leaks
+    return () => {
+      timeoutIds.forEach((id) => clearTimeout(id));
+    };
   }, []);
 
   return (
@@ -81,24 +89,14 @@ const Project = ({ project }) => {
           {/* Action Buttons */}
           <div className="project-actions">
             {project.github_link && !project.is_private && (
-              <a
-                href={project.github_link}
-                target="_blank"
-                rel="noreferrer"
-                className="project-btn project-btn-glass"
-              >
+              <a href={project.github_link} target="_blank" rel="noreferrer" className="project-btn project-btn-glass">
                 <RiGithubFill className="project-btn-icon" />
                 <span>View Source Code</span>
               </a>
             )}
 
             {project.project_link && (
-              <a
-                href={project.project_link}
-                target="_blank"
-                rel="noreferrer"
-                className="project-btn project-btn-primary"
-              >
+              <a href={project.project_link} target="_blank" rel="noreferrer" className="project-btn project-btn-primary">
                 <RiExternalLinkLine className="project-btn-icon" />
                 <span>Live Demo</span>
               </a>
@@ -111,17 +109,9 @@ const Project = ({ project }) => {
           <h2 className="project-section-title">Technologies Used</h2>
           <div className="project-tech-grid">
             {project.technologies.map((tech) => (
-              <div
-                key={`${project.title}-tech-${tech.name}`}
-                className="project-tech-badge"
-              >
+              <div key={`${project.title}-tech-${tech.name}`} className="project-tech-badge">
                 <div className="relative w-6 h-6 flex-shrink-0">
-                  <Image
-                    src={tech.image}
-                    alt={tech.name}
-                    fill
-                    className="project-tech-icon object-contain"
-                  />
+                  <Image src={tech.image} alt={tech.name} fill className="project-tech-icon object-contain" />
                 </div>
                 <span>{tech.name}</span>
               </div>
@@ -154,12 +144,7 @@ const Project = ({ project }) => {
                       }}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        onLoad={recalcMaxSlideHeight}
-                        className="project-gallery-image"
-                        src={image}
-                        alt={`${project.title} screenshot ${index + 1}`}
-                      />
+                      <img onLoad={recalcMaxSlideHeight} className="project-gallery-image" src={image} alt={`${project.title} screenshot ${index + 1}`} />
                     </div>
                   </SplideSlide>
                 ))}

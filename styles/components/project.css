@@ -29,7 +29,9 @@
 }
 
 /* Parallax container - transform controlled by JS */
-.project-hero > div:first-child {
+.project-hero-bg-parallax {
+  position: absolute;
+  inset: 0;
   will-change: transform;
 }
 

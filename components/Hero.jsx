@@ -3,11 +3,14 @@ import Image from 'next/image';
 import { MdDone } from 'react-icons/md';
 import { RiToolsFill } from 'react-icons/ri';
 
+const FALLBACK_IMAGE = '/og-image.png';
+
 const Hero = ({ data }) => {
   const heroRef = useRef(null);
   const bgRef = useRef(null);
   const titleRef = useRef(null);
   const badgeRef = useRef(null);
+  const heroImage = data?.images?.[0] || FALLBACK_IMAGE;
 
   // Parallax scroll effect
   const handleScroll = useCallback(() => {
@@ -38,6 +41,8 @@ const Hero = ({ data }) => {
     const hero = heroRef.current;
     const title = titleRef.current;
     const badge = badgeRef.current;
+    let titleTimeoutId;
+    let badgeTimeoutId;
 
     if (hero) {
       hero.style.opacity = '0';
@@ -52,7 +57,7 @@ const Hero = ({ data }) => {
     if (title) {
       title.style.opacity = '0';
       title.style.transform = 'translateY(30px)';
-      setTimeout(() => {
+      titleTimeoutId = setTimeout(() => {
         title.style.transition = 'opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         title.style.opacity = '1';
         title.style.transform = 'translateY(0)';
@@ -62,20 +67,26 @@ const Hero = ({ data }) => {
     if (badge) {
       badge.style.opacity = '0';
       badge.style.transform = 'translateY(20px)';
-      setTimeout(() => {
+      badgeTimeoutId = setTimeout(() => {
         badge.style.transition = 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
         badge.style.opacity = '1';
         badge.style.transform = 'translateY(0)';
       }, 500);
     }
+
+    // Cleanup timeouts on unmount to prevent memory leaks
+    return () => {
+      if (titleTimeoutId) clearTimeout(titleTimeoutId);
+      if (badgeTimeoutId) clearTimeout(badgeTimeoutId);
+    };
   }, []);
 
   return (
     <section className="project-hero" ref={heroRef}>
       {/* Background container with overflow hidden for the scaled image */}
       <div className="project-hero-bg-container">
-        <div ref={bgRef} className="absolute inset-0">
-          <Image className="project-hero-bg" src={data.images[0]} alt={`${data.title} Background`} fill priority sizes="100vw" />
+        <div ref={bgRef} className="project-hero-bg-parallax">
+          <Image className="project-hero-bg" src={heroImage} alt={`${data?.title || 'Project'} Background`} fill priority sizes="100vw" />
         </div>
       </div>
 
